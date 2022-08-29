@@ -71,5 +71,40 @@ class DatabaseSeeder extends Seeder
             ],
 
         ]);
+        
+        DB::table('price_by_dates')->insert([
+            [
+                'seat_date'   => '10 days',
+                'percentage'   => 5,
+            ],
+            [
+                'seat_date'   => '9 days',
+                'percentage'   => 7,
+            ],
+            [
+                'seat_date'   => '8 days',
+                'percentage'   => 9,
+            ],
+            [
+                'seat_date'   => '7 days',
+                'percentage'   => 10,
+            ],
+            [
+                'seat_date'   => '6 days',
+                'percentage'   => 12,
+            ],
+            [
+                'seat_date'   => '5 days',
+                'percentage'   => 14,
+            ],
+            [
+                'seat_date'   => '4 days',
+                'percentage'   => 16,
+            ],
+            [
+                'seat_date'   => '1-3 days',
+                'percentage'   => 25,
+            ],
+        ]);
     }
 }

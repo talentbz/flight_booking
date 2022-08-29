@@ -1,7 +1,4 @@
 $(document).ready(function(){
-    $(".reset-btn").click(function(){
-        $("#custom-form").trigger("reset");
-    });
     $('#custom-form').submit(function(e){
         e.preventDefault();
         e.stopPropagation();
@@ -18,9 +15,10 @@ $(document).ready(function(){
             success: function (res) {
                 if(res.result == "success" ){
                     toastr["success"]("Success!!!");
-                } else {
-                    toastr["error"](res.error[0]);
-                }
+                    setInterval(function(){ 
+                        location.href = list_url; 
+                    }, 2000);
+                } 
             },
             error: function (errors){
                 toastr["warning"](errors);
@@ -30,18 +28,20 @@ $(document).ready(function(){
             processData: false
         })
     })
-    $("#wizard-picture").change(function(){
-        readURL(this);
-    });
+
+    $('.price-status').change(function(){
+    	var status= $(this).prop('checked');
+    	var id=$(this).val();
+    	$.ajax({
+    		type:'GET',
+    		dataType:'JSON',
+    		url:status_change,
+          	data:{status:status, id:id},
+          	success:function(res){
+                if(res.result == "success" ){
+                    toastr["success"]("Success!!!");
+                }
+	        }
+    	})
+    })
 });
-
-function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-            $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
-}

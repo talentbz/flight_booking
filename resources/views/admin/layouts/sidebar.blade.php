@@ -19,9 +19,6 @@
                         <i class="bx bx-user-circle"></i>
                         <span key="t-ecommerce">Admin</span>
                     </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="javascript: void(0);" key="t-products">Change Profile</a></li>
-                    </ul>
                 </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -61,8 +58,12 @@
                         <li><a href="javascript: void(0);" key="t-products">Price Management</a></li>
                     </ul>
                 </li>
-
-
+                <li>
+                    <a href="{{route('admin.schedule.index')}}" class="waves-effect">
+                        <i class="bx bx-calendar"></i>
+                        <span key="t-ecommerce">Schedule</span>
+                    </a>
+                </li>
             </ul>
         </div>
         <!-- Sidebar -->

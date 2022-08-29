@@ -19,7 +19,7 @@ class CreateSchedulesTable extends Migration
             $table->string('departure_time');
             $table->date('return_date');
             $table->string('return_time');
-            $table->boolean('status');
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }

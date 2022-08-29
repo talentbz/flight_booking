@@ -1,7 +1,4 @@
 $(document).ready(function(){
-    $(".reset-btn").click(function(){
-        $("#custom-form").trigger("reset");
-    });
     $('#custom-form').submit(function(e){
         e.preventDefault();
         e.stopPropagation();
@@ -18,8 +15,10 @@ $(document).ready(function(){
             success: function (res) {
                 if(res.result == "success" ){
                     toastr["success"]("Success!!!");
-                } else {
-                    toastr["error"](res.error[0]);
+                    $('#editModal').modal('hide');
+                    setInterval(function(){ 
+                        location.href = list_url; 
+                    }, 2000);
                 }
             },
             error: function (errors){
@@ -30,18 +29,29 @@ $(document).ready(function(){
             processData: false
         })
     })
-    $("#wizard-picture").change(function(){
-        readURL(this);
-    });
+    $('.price-status').change(function(){
+    	var status= $(this).prop('checked');
+    	var id=$(this).val();
+    	$.ajax({
+    		type:'GET',
+    		dataType:'JSON',
+    		url:status_change,
+          	data:{status:status, id:id},
+          	success:function(res){
+                if(res.result == "success" ){
+                    toastr["success"]("Success!!!");
+                }
+	        }
+    	})
+    })
+
+    $('table').on('click', '.edit',function (e) {
+        var tr = e.target.parentNode.parentNode;
+        var id =  $(this).attr('data-id')
+        var name = tr.cells[1].textContent;
+        var percentage = tr.cells[2].textContent;
+        $('input[name="id"]').val(id)
+        $('#price-name').val(name);
+        $('#percentage').val(percentage);
+    })
 });
-
-function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-            $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
-}
