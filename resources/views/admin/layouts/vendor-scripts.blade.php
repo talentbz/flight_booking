@@ -4,6 +4,14 @@
 <script src="{{ URL::asset('assets/libs/metismenu/metismenu.min.js')}}"></script>
 <script src="{{ URL::asset('assets/libs/simplebar/simplebar.min.js')}}"></script>
 <script src="{{ URL::asset('assets/libs/node-waves/node-waves.min.js')}}"></script>
+<!-- Required datatable js -->
+<script src="{{ URL::asset('/assets/libs/datatables/datatables.min.js') }}"></script>
+<!-- Datatable init js -->
+<script src="{{ URL::asset('/assets/js/pages/datatables.init.js') }}"></script>
+<!-- toastr plugin -->
+<script src="{{ URL::asset('/assets/libs/toastr/toastr.min.js') }}"></script>
+<!-- toastr init -->
+<script src="{{ URL::asset('/assets/js/pages/toastr.init.js') }}"></script>
 <script>
     $('#change-password').on('submit',function(event){
         event.preventDefault();

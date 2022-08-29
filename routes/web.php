@@ -25,14 +25,25 @@ Route::post('/update-password/{id}', [App\Http\Controllers\HomeController::class
 
 //Language Translation
 Route::get('index/{locale}', [App\Http\Controllers\HomeController::class, 'lang']);
+Route::get('/', [App\Http\Controllers\FrontController::class, 'index'])->name('home');
 
+//admin section
 Route::prefix('/admin')->middleware(['auth:web', 'Admin'])->group(function () {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'root'])->name('root');
+    Route::get('/edit_profile', [App\Http\Controllers\Admin\AdminController::class, 'index'])->name('admin.edit.profile');
+    Route::post('/edit_profile', [App\Http\Controllers\Admin\AdminController::class, 'store'])->name('admin.store.profile');
     Route::prefix('/user')->group(function () {
         Route::get('/', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('admin.user.index');
     });
     Route::prefix('/seat')->group(function () {
-        Route::get('/', [App\Http\Controllers\Admin\SeatController::class, 'index'])->name('admin.seat.index');
+        Route::get('/edit', [App\Http\Controllers\Admin\SeatController::class, 'edit'])->name('admin.seat.edit');
+        Route::post('/edit', [App\Http\Controllers\Admin\SeatController::class, 'store'])->name('admin.seat.store');
+    });
+    Route::prefix('/price')->group(function () {
+        Route::get('/by_count', [App\Http\Controllers\Admin\PriceController::class, 'countIndex'])->name('admin.price.count_index');
+        Route::get('/by_count_status', [App\Http\Controllers\Admin\PriceController::class, 'statusChange'])->name('admin.price.count_status');
+        Route::post('/by_count_store', [App\Http\Controllers\Admin\PriceController::class, 'countStore'])->name('admin.price.count_store');
+        Route::get('/by_date', [App\Http\Controllers\Admin\PriceController::class, 'dateIndex'])->name('admin.price.date_index');
     });
     Route::prefix('/booking')->group(function () {
         Route::get('/', [App\Http\Controllers\Admin\BookingController::class, 'index'])->name('admin.booking.index');

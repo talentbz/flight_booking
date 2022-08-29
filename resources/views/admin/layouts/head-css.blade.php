@@ -7,3 +7,6 @@
 <!-- App Css-->
 <link href="{{ URL::asset('/assets/css/app.css') }}" id="app-style" rel="stylesheet" type="text/css" />
 
+<link href="{{ URL::asset('/assets/libs/datatables/datatables.min.css') }}" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="{{ URL::asset('/assets/libs/toastr/toastr.min.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('/assets/admin/style.css')}}" rel="stylesheet" type="text/css" >
