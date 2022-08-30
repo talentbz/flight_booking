@@ -36,7 +36,7 @@ class ScheduleController extends Controller
     {
         $schedule = Schedule::where('id', $request->id)
                                 ->update([
-                                    'status' => $request->status,
+                                    'status' => toBoolean($request->status),
                                 ]);
         return response()->json(['result' => 'success']);
     }

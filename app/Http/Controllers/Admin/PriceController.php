@@ -30,7 +30,7 @@ class PriceController extends Controller
     {
         $by_count = PriceByCount::where('id', $request->id)
                                 ->update([
-                                    'status' => $request->status,
+                                    'status' => toBoolean($request->status),
                                 ]);
         return response()->json(['result' => 'success']);
     }
@@ -45,7 +45,7 @@ class PriceController extends Controller
     {
         $by_date = PriceByDate::where('id', $request->id)
                                 ->update([
-                                    'status' => $request->status,
+                                    'status' => toBoolean($request->status),
                                 ]);
         return response()->json(['result' => 'success']);
     }
