@@ -8,6 +8,9 @@ use app\Models\User;
 use DB, Validator, Exception, Image, URL;
 use Illuminate\Support\Facades\File; 
 use Auth;
+use Artisan;
+use Session;
+
 class AdminController extends Controller
 {
     public function index(Request $request)
@@ -38,5 +41,15 @@ class AdminController extends Controller
         };
         $user->save();
         return response()->json(['result' => 'success']);
+    }
+    public function clear(Request $request)
+    {
+        Artisan::call('cache:clear');
+        Artisan::call('config:clear');
+        Artisan::call('route:clear');
+        Artisan::call('view:clear');
+
+        Session::flash('success', 'Cache, route, view, config cleared successfully!');
+        return back();
     }
 }

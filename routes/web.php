@@ -32,6 +32,7 @@ Route::prefix('/admin')->middleware(['auth:web', 'Admin'])->group(function () {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'root'])->name('root');
     Route::get('/edit_profile', [App\Http\Controllers\Admin\AdminController::class, 'index'])->name('admin.edit.profile');
     Route::post('/edit_profile', [App\Http\Controllers\Admin\AdminController::class, 'store'])->name('admin.store.profile');
+    Route::get('/cache_clear', [App\Http\Controllers\Admin\AdminController::class, 'clear'])->name('admin.cache.clear');
     Route::prefix('/user')->group(function () {
         Route::get('/', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('admin.user.index');
     });
