@@ -48,7 +48,7 @@ class AdminController extends Controller
         Artisan::call('config:clear');
         Artisan::call('route:clear');
         Artisan::call('view:clear');
-
+        "<pre>". shell_exec ('composer dump-autoload')."</pre>"; 
         Session::flash('success', 'Cache, route, view, config cleared successfully!');
         return back();
     }
