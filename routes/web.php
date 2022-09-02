@@ -58,5 +58,6 @@ Route::prefix('/admin')->middleware(['auth:web', 'Admin'])->group(function () {
     });
     Route::prefix('/booking')->group(function () {
         Route::get('/', [App\Http\Controllers\Admin\BookingController::class, 'index'])->name('admin.booking.index');
+        Route::get('/create', [App\Http\Controllers\Admin\BookingController::class, 'create'])->name('admin.booking.create');
     });
 });

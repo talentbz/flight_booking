@@ -54,7 +54,7 @@
                         <span key="t-ecommerce">Booking History</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="javascript: void(0);" key="t-products">Booking List</a></li>
+                        <li><a href="{{route('admin.booking.index')}}" key="t-products">Booking List</a></li>
                         <li><a href="javascript: void(0);" key="t-products">Price Management</a></li>
                     </ul>
                 </li>
