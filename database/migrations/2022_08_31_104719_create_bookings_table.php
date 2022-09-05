@@ -17,13 +17,15 @@ class CreateBookingsTable extends Migration
             $table->id();
             $table->string('booking_no');
             $table->string('schedule_id');
-            $table->string('seat_type_id');
-            $table->string('seat_no');
             $table->string('air_line');
+            $table->string('trip_type');
+            $table->string('start_seat')->nullable();
+            $table->string('start_date')->nullable();
+            $table->string('return_seat')->nullable();
+            $table->string('return_date')->nullable();
             $table->string('user_id')->nullable();
             $table->string('user_name')->nullable();
             $table->string('phone')->nullable();
-            $table->integer('guest');
             $table->string('cost');
             $table->integer('payment_type');
             $table->string('payment_status');

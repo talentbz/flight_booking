@@ -5,21 +5,23 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Schedule;
+use App\Models\AirLine;
 
 class ScheduleController extends Controller
 {
     public function index(Request $request)
     {
-        $schedule = Schedule::orderBy('id')->get();
+        $schedule = Schedule::leftJoin('air_lines', 'schedules.airline_id', 'air_lines.id')
+                            ->select("schedules.*", "air_lines.name")->get();                   
         return view('admin.pages.schedule.index', [
             'schedule' => $schedule,
         ]);
     }
     public function create(Request $request)
     {
-        // $by_count = PriceByCount::orderBy('id')->get();
+        $airline = AirLine::where('status', 1)->get();
         return view('admin.pages.schedule.create', [
-            // 'by_count' => $by_count,
+            'airline' => $airline,
         ]);
     }
     public function store(Request $request)
@@ -29,6 +31,7 @@ class ScheduleController extends Controller
         $schedule->departure_time = $request->departure_time;
         $schedule->return_date = $request->return_date;
         $schedule->return_time = $request->return_time;
+        $schedule->airline_id = $request->airline;
         $schedule->save();
         return response()->json(['result' => 'success']);
     }
@@ -42,9 +45,11 @@ class ScheduleController extends Controller
     }
     public function edit(Request $request, $id)
     {
+        $airline = AirLine::get();
         $schedule = Schedule::where('id', $id)->first();
         return view('admin.pages.schedule.edit', [
             'schedule' => $schedule,
+            'airline' => $airline,
         ]);
     }
     public function update(Request $request, $id)
@@ -54,6 +59,7 @@ class ScheduleController extends Controller
         $schedule->departure_time = $request->departure_time;
         $schedule->return_date = $request->return_date;
         $schedule->return_time = $request->return_time;
+        $schedule->airline_id = $request->airline;
         $schedule->save();
         return response()->json(['result' => 'success']);
     }

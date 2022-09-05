@@ -28,63 +28,111 @@
                             <div class="col-md-6">
                                 <div class="right-setting">
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label class="form-label">Booking Number</label>
-                                                <input type="text" class="form-control"  readonly>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">Seat Number</label>
-                                                <input type="text" class="form-control" name="seat_no[]" readonly>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">Customer Full Name</label>
-                                                <input type="text" class="form-control" required>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">Customer Phone</label>
-                                                <input type="text" class="form-control" required>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">Select Payment Status</label>
-                                                <select class="form-control">
-                                                    <option value="1">Paid</option>
-                                                    <option value="2">Unpaid</option>
-                                                </select>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">Total Cost</label>
-                                                <input type="text" class="form-control" name="total_price" readonly>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label class="form-label">Booking Date</label>
-                                                <div class="input-group" id="datepicker2">
-                                                    <input type="text" class="form-control" placeholder="yyyy-mm-dd"
-                                                        data-date-format="yyyy-mm-dd" data-date-container='#datepicker2'
-                                                        data-provide="datepicker" data-date-autoclose="true" required>
-                                                    <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                                        <div class="booking_no">
+                                            <div class="row">
+                                                <div class="mb-3 mt-4">
+                                                    <h4>Booking Info</h4>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Booking Number</label>
+                                                        <input type="text" class="form-control"  value="{{time()}}" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6"></div>
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">AirLine</label>
+                                                        <select class="form-select airline" name="air_line" required>
+                                                            <option value="">Select</option>
+                                                            @foreach($airline as $row)
+                                                            <option value="{{$row->id}}">{{$row->name}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Booking Schedule</label>
+                                                        <select class="form-select booking_schedule" name="" required>
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">Seat Type</label>
-                                                <input type="text" class="form-control"  readonly>
+                                        </div>
+                                        <div class="trip_type">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Trip Type</label>
+                                                        <select name="" class="form-select" required>
+                                                            <option value="">Select</option>
+                                                            <option value="1">Round Trip</option>
+                                                            <option value="2">InRound</option>
+                                                            <option value="3">OutRound</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">Customer Email</label>
-                                                <input type="email" class="form-control" required>
+                                        </div>
+                                        <div class="seat_section">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">InRound</label>
+                                                        <a href="javascript:void(0)" class="start_seat_map">view seat map</a>
+                                                        <input type="text" class="form-control" name="seat_no[]" readonly required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">OutRound</label>
+                                                        <a href="javascript:void(0)">view seat map</a>
+                                                        <input type="text" class="form-control" name="seat_no[]" readonly required>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">Number of Guests</label>
-                                                <input type="number" class="form-control" name="guest" readonly>
+                                        </div>
+                                        <div class="customer_info">
+                                            <div class="row">
+                                                <div class="mb-3 mt-4">
+                                                    <h4>Customer Info</h4>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Customer Email</label>
+                                                        <input type="email" class="form-control" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Customer Phone</label>
+                                                        <input type="text" class="form-control" required>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">Payment Method</label>
-                                                <select class="form-control">
-                                                    <option value="1">Skrill</option>
-                                                    <option value="2">Payout</option>
-                                                </select>
+                                        </div>
+                                        <div class="payment_info">
+                                            <div class="row">
+                                                <div class="mb-3 mt-4">
+                                                    <h4>Payment Info</h4>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Total Cost</label>
+                                                        <input type="text" class="form-control" name="total_price" readonly="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Payment Method</label>
+                                                        <select class="form-select">
+                                                            <option value="1">Skrill</option>
+                                                            <option value="2">PayStack</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="mb-3 text-end">
@@ -113,4 +161,8 @@
     <!-- form advanced init -->
     <script src="{{ URL::asset('/assets/js/pages/form-advanced.init.js') }}"></script>
     <script src="{{ URL::asset('/assets/admin/pages/booking/index.js') }}"></script>
+    <script>
+        schedule = "{{route('admin.booking.schedule')}}";
+        seat_map = "{{route('admin.booking.seat_map')}}";
+    </script>
 @endsection

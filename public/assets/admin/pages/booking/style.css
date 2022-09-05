@@ -96,6 +96,7 @@ ol {
     box-shadow: none;
     cursor: not-allowed;
 }
+
 .seat label {
     display: block;
     position: relative;
@@ -110,6 +111,9 @@ ol {
     animation-duration: 300ms;
     animation-fill-mode: both;
     color: #000;
+}
+.business_seat label {
+    background: #18a2d7;
 }
 .seat label:before {
     content: "";
@@ -191,5 +195,5 @@ ol {
     animation-name: rubberBand;
 }
 .right-setting {
-    position: fixed;
+    /* position: fixed; */
 }

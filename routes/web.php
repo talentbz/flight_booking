@@ -59,5 +59,15 @@ Route::prefix('/admin')->middleware(['auth:web', 'Admin'])->group(function () {
     Route::prefix('/booking')->group(function () {
         Route::get('/', [App\Http\Controllers\Admin\BookingController::class, 'index'])->name('admin.booking.index');
         Route::get('/create', [App\Http\Controllers\Admin\BookingController::class, 'create'])->name('admin.booking.create');
+        Route::get('/seat_map', [App\Http\Controllers\Admin\BookingController::class, 'seatMap'])->name('admin.booking.seat_map');
+        Route::get('/schedule', [App\Http\Controllers\Admin\BookingController::class, 'schedule'])->name('admin.booking.schedule');
+    });
+    Route::prefix('/airline')->group(function () {
+        Route::get('/', [App\Http\Controllers\Admin\AirlineController::class, 'index'])->name('admin.airline.index');
+        Route::get('/create', [App\Http\Controllers\Admin\AirlineController::class, 'create'])->name('admin.airline.create');
+        Route::get('/edit/{id}', [App\Http\Controllers\Admin\AirlineController::class, 'edit'])->name('admin.airline.edit');
+        Route::post('/update/{id}', [App\Http\Controllers\Admin\AirlineController::class, 'update'])->name('admin.airline.update');
+        Route::post('/store', [App\Http\Controllers\Admin\AirlineController::class, 'store'])->name('admin.airline.store');
+        Route::get('/status', [App\Http\Controllers\Admin\AirlineController::class, 'status'])->name('admin.airline.status');
     });
 });

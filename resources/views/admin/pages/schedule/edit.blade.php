@@ -23,6 +23,18 @@
                             <div class="col-md-3"></div>
                             <div class="col-md-6">
                                 <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Select AirLine</label>
+                                                <select class="form-select" name="airline" required>
+                                                    @foreach($airline as $row)
+                                                    <option value="{{$row->id}}" {{$schedule->airline_id == $row->id ? "selected": ""}}>{{$row->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">Departure Date</label>

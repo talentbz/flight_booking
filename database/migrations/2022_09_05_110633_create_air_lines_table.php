@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSchedulesTable extends Migration
+class CreateAirLinesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,9 @@ class CreateSchedulesTable extends Migration
      */
     public function up()
     {
-        Schema::create('schedules', function (Blueprint $table) {
+        Schema::create('air_lines', function (Blueprint $table) {
             $table->id();
-            $table->date('departure_date');
-            $table->string('departure_time');
-            $table->date('return_date');
-            $table->string('return_time');
-            $table->string('airline_id');
+            $table->string('name');
             $table->boolean('status')->default(1);
             $table->timestamps();
         });
@@ -32,6 +28,6 @@ class CreateSchedulesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('schedules');
+        Schema::dropIfExists('air_lines');
     }
 }

@@ -17,6 +17,7 @@ class CreatePriceByDatesTable extends Migration
             $table->id();
             $table->string('seat_date');
             $table->string('percentage');
+            $table->integer('date');
             $table->boolean('status')->default(1);
             $table->timestamps();
         });

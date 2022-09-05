@@ -75,35 +75,49 @@ class DatabaseSeeder extends Seeder
         DB::table('price_by_dates')->insert([
             [
                 'seat_date'   => '10 days',
-                'percentage'   => 5,
+                'percentage'  => 5,
+                'date'        => 10,
             ],
             [
                 'seat_date'   => '9 days',
-                'percentage'   => 7,
+                'percentage'  => 7,
+                'date'        => 9,
             ],
             [
                 'seat_date'   => '8 days',
-                'percentage'   => 9,
+                'percentage'  => 9,
+                'date'        => 8,
             ],
             [
                 'seat_date'   => '7 days',
-                'percentage'   => 10,
+                'percentage'  => 10,
+                'date'        => 7,
             ],
             [
                 'seat_date'   => '6 days',
-                'percentage'   => 12,
+                'percentage'  => 12,
+                'date'        => 6,
             ],
             [
                 'seat_date'   => '5 days',
-                'percentage'   => 14,
+                'percentage'  => 14,
+                'date'        => 5,
             ],
             [
                 'seat_date'   => '4 days',
-                'percentage'   => 16,
+                'percentage'  => 16,
+                'date'        => 4,
             ],
             [
                 'seat_date'   => '1-3 days',
-                'percentage'   => 25,
+                'percentage'  => 25,
+                'date'        => 3,
+            ],
+        ]);
+        DB::table('air_lines')->insert([
+            [
+                'name'    => 'ACC - LHR',
+                'status'  => 1,
             ],
         ]);
     }

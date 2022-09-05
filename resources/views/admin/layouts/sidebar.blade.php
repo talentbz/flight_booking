@@ -64,6 +64,12 @@
                         <span key="t-ecommerce">Schedule</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{route('admin.airline.index')}}" class="waves-effect">
+                        <i class="fas fa-plane"></i>
+                        <span key="t-ecommerce">Airline</span>
+                    </a>
+                </li>
             </ul>
         </div>
         <!-- Sidebar -->
