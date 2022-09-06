@@ -59,6 +59,7 @@ Route::prefix('/admin')->middleware(['auth:web', 'Admin'])->group(function () {
     Route::prefix('/booking')->group(function () {
         Route::get('/', [App\Http\Controllers\Admin\BookingController::class, 'index'])->name('admin.booking.index');
         Route::get('/create', [App\Http\Controllers\Admin\BookingController::class, 'create'])->name('admin.booking.create');
+        Route::post('/store', [App\Http\Controllers\Admin\BookingController::class, 'store'])->name('admin.booking.store');
         Route::get('/seat_map', [App\Http\Controllers\Admin\BookingController::class, 'seatMap'])->name('admin.booking.seat_map');
         Route::get('/schedule', [App\Http\Controllers\Admin\BookingController::class, 'schedule'])->name('admin.booking.schedule');
     });

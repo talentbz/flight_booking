@@ -22,8 +22,8 @@
                     <form class="custom-validation" action="" id="custom-form">
                         @csrf
                         <div class="row">
-                            <div class="col-md-6">
-                                @include('admin.pages.booking.seatmap')
+                            <div class="col-md-6 seat_map_layout">
+                                
                             </div>
                             <div class="col-md-6">
                                 <div class="right-setting">
@@ -66,7 +66,7 @@
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
                                                         <label class="form-label">Trip Type</label>
-                                                        <select name="" class="form-select" required>
+                                                        <select name="trip_type" class="form-select" required>
                                                             <option value="">Select</option>
                                                             <option value="1">Round Trip</option>
                                                             <option value="2">InRound</option>
@@ -78,19 +78,19 @@
                                         </div>
                                         <div class="seat_section">
                                             <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="mb-3">
+                                                <div class="col-md-6 in_round">
+                                                    <!-- <div class="mb-3">
                                                         <label class="form-label">InRound</label>
-                                                        <a href="javascript:void(0)" class="start_seat_map">view seat map</a>
-                                                        <input type="text" class="form-control" name="seat_no[]" readonly required>
-                                                    </div>
+                                                        <a href="javascript:void(0)" class="inround_seat_map">view seat map</a>
+                                                        <input type="text" class="form-control" name="in_round[]" readonly required>
+                                                    </div> -->
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="mb-3">
+                                                <div class="col-md-6 out_round">
+                                                    <!-- <div class="mb-3">
                                                         <label class="form-label">OutRound</label>
-                                                        <a href="javascript:void(0)">view seat map</a>
-                                                        <input type="text" class="form-control" name="seat_no[]" readonly required>
-                                                    </div>
+                                                        <a href="javascript:void(0)" class="outround_seat_map">view seat map</a>
+                                                        <input type="text" class="form-control" name="out_round[]" readonly required>
+                                                    </div> -->
                                                 </div>
                                             </div>
                                         </div>
@@ -164,5 +164,6 @@
     <script>
         schedule = "{{route('admin.booking.schedule')}}";
         seat_map = "{{route('admin.booking.seat_map')}}";
+        store = "{{route('admin.booking.store')}}";
     </script>
 @endsection

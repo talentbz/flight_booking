@@ -109,14 +109,28 @@ class DatabaseSeeder extends Seeder
                 'date'        => 4,
             ],
             [
-                'seat_date'   => '1-3 days',
+                'seat_date'   => '3 days',
                 'percentage'  => 25,
                 'date'        => 3,
+            ],
+            [
+                'seat_date'   => '2 days',
+                'percentage'  => 25,
+                'date'        => 2,
+            ],
+            [
+                'seat_date'   => '1 days',
+                'percentage'  => 25,
+                'date'        => 1,
             ],
         ]);
         DB::table('air_lines')->insert([
             [
                 'name'    => 'ACC - LHR',
+                'status'  => 1,
+            ],
+            [
+                'name'    => 'ACR - JFK',
                 'status'  => 1,
             ],
         ]);

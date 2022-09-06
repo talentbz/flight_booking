@@ -23,6 +23,12 @@
         <!-- Start right Content here -->
         <!-- ============================================================== -->
         <div class="main-content">
+            <!-- loading spinner -->
+            <div class="spinner-wrapper">
+                <div class="spinner-border text-primary m-1" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
             <div class="page-content">
                 <div class="container-fluid">
                     @yield('content')
@@ -38,6 +44,21 @@
 
     <!-- JAVASCRIPT -->
     @include('admin.layouts.vendor-scripts')
+    <script>
+        $(document).ready(function(){
+        //ajax loading spinner
+        var loading = $('.spinner-wrapper').hide();
+        $(document)
+            .ajaxStart(function () {
+                loading.show();
+            })
+            .ajaxStop(function () {
+                setTimeout(function(){
+                    loading.hide();
+                }, 500)
+            });
+        })
+    </script>
 </body>
 
 </html>
