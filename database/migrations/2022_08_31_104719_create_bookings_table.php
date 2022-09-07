@@ -25,10 +25,12 @@ class CreateBookingsTable extends Migration
             $table->string('return_date')->nullable();
             $table->string('user_id')->nullable();
             $table->string('user_name')->nullable();
+            $table->string('user_email')->nullable();
             $table->string('phone')->nullable();
             $table->string('cost');
             $table->integer('payment_type');
             $table->string('payment_status');
+            $table->string('created_by');
             $table->timestamps();
         });
     }

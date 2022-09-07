@@ -26,7 +26,7 @@
                         <span key="t-ecommerce">User Management</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="javascript: void(0);" key="t-products">User List</a></li>
+                        <li><a href="{{route('admin.user.index')}}" key="t-products">User List</a></li>
                     </ul>
                 </li>
                 <li>
@@ -46,6 +46,7 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{route('admin.price.count_index')}}" key="t-products">By Count</a></li>
                         <li><a href="{{route('admin.price.date_index')}}" key="t-products">By Date</a></li>
+                        <li><a href="{{route('admin.price.baggage_index')}}" key="t-products">Baggage</a></li>
                     </ul>
                 </li>
                 <li>

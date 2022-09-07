@@ -22,10 +22,10 @@ $(document).ready(function () {
             return parseInt(a, 10) + parseInt(b, 10);
         }, 0);
 
-        if($(".trip_type_value").val() == "inRound") {
-            $("input[name='in_round[]']").val(seat);
+        if($(".trip_type_value").val() == "inBound") {
+            $("input[name='in_bound']").val(seat);
         } else {
-            $("input[name='out_round[]']").val(seat);
+            $("input[name='out_bound']").val(seat);
         }
         $("input[name='total_price']").val(total_price);
     })
@@ -56,6 +56,8 @@ $(document).ready(function () {
                     console.log(res)
                 },
             })
+        } else {
+            $('.booking_schedule').empty();
         }
     })
     $(".booking_schedule").on("change", function (e) { 
@@ -70,35 +72,37 @@ $(document).ready(function () {
         emptySection();
         if(trip_type == 1){
             emptySection();
-            $(".in_round").append(in_round_html)
-            $(".out_round").append(out_round_html)
+            $(".in_bound").append(in_bound_html)
+            $(".out_bound").append(out_bound_html)
         } else if(trip_type == 2){
             emptySection();
-            $(".in_round").append(in_round_html)
+            $(".in_bound").append(in_bound_html)
         } else if(trip_type == 3) {
             emptySection();
-            $(".out_round").append(out_round_html)
+            $(".out_bound").append(out_bound_html)
         } else {
             emptySection();
         }
     })
-    in_round_html = '<div class="mb-3">' +
-                        '<label class="form-label">InRound</label>' +
-                        '<a href="javascript:void(0)" class="inround_seat_map">view seat map</a>' +
-                        '<input type="text" class="form-control" name="in_round[]" readonly required>' +
+    in_bound_html = '<div class="mb-3">' +
+                        '<label class="form-label">OutBound</label>' +
+                        '<a href="javascript:void(0)" class="outbound_seat_map">view seat map</a>' +
+                        '<input type="text" class="form-control" name="in_bound" readonly required>' +
                     '</div>'
-    out_round_html = '<div class="mb-3">' +
-                        '<label class="form-label">InRound</label>' +
-                        '<a href="javascript:void(0)" class="outround_seat_map">view seat map</a>' +
-                        '<input type="text" class="form-control" name="out_round[]" readonly required>' +
+    out_bound_html = '<div class="mb-3">' +
+                        '<label class="form-label">InBound</label>' +
+                        '<a href="javascript:void(0)" class="inbound_seat_map">view seat map</a>' +
+                        '<input type="text" class="form-control" name="out_bound" readonly required>' +
                     '</div>'
 
-    $(document).on('click', '.inround_seat_map', function(e){
-        getSeatMap(shedule_id, 'inRound')
+    $(document).on('click', '.outbound_seat_map', function(e){
+        seat =[];
+        getSeatMap(shedule_id, 'inBound')
     })
 
-    $(document).on('click', '.outround_seat_map', function(e){
-        getSeatMap(shedule_id, 'outRound')
+    $(document).on('click', '.inbound_seat_map', function(e){
+        seat =[];
+        getSeatMap(shedule_id, 'outBound')
     })
     function getSeatMap(shedule_id, trip_type) {
         $.ajax({
@@ -115,9 +119,10 @@ $(document).ready(function () {
     }
 
     function emptySection(){
-        $(".out_round").empty()
-        $(".in_round").empty()
+        $(".out_bound").empty()
+        $(".in_bound").empty()
         $('.seat_map_layout').empty();
+        $('input[name="total_price"]').val('');
     }
     $('#custom-form').submit(function(e){
         e.preventDefault();

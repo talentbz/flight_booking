@@ -36,7 +36,7 @@
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
                                                         <label class="form-label">Booking Number</label>
-                                                        <input type="text" class="form-control"  value="{{time()}}" readonly>
+                                                        <input type="text" class="form-control"  value="{{time()}}" name="booking_no" readonly>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6"></div>
@@ -54,7 +54,7 @@
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
                                                         <label class="form-label">Booking Schedule</label>
-                                                        <select class="form-select booking_schedule" name="" required>
+                                                        <select class="form-select booking_schedule" name="booking_schedule" required>
                                                             <option value="">Select</option>
                                                         </select>
                                                     </div>
@@ -69,8 +69,8 @@
                                                         <select name="trip_type" class="form-select" required>
                                                             <option value="">Select</option>
                                                             <option value="1">Round Trip</option>
-                                                            <option value="2">InRound</option>
-                                                            <option value="3">OutRound</option>
+                                                            <option value="2">OutBound</option>
+                                                            <option value="3">InBound</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -78,14 +78,14 @@
                                         </div>
                                         <div class="seat_section">
                                             <div class="row">
-                                                <div class="col-md-6 in_round">
+                                                <div class="col-md-6 in_bound">
                                                     <!-- <div class="mb-3">
                                                         <label class="form-label">InRound</label>
                                                         <a href="javascript:void(0)" class="inround_seat_map">view seat map</a>
                                                         <input type="text" class="form-control" name="in_round[]" readonly required>
                                                     </div> -->
                                                 </div>
-                                                <div class="col-md-6 out_round">
+                                                <div class="col-md-6 out_bound">
                                                     <!-- <div class="mb-3">
                                                         <label class="form-label">OutRound</label>
                                                         <a href="javascript:void(0)" class="outround_seat_map">view seat map</a>
@@ -101,14 +101,20 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
+                                                        <label class="form-label">Full Name</label>
+                                                        <input type="text" class="form-control" name="user_name" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
                                                         <label class="form-label">Customer Email</label>
-                                                        <input type="email" class="form-control" required>
+                                                        <input type="email" class="form-control" name="user_email" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
                                                         <label class="form-label">Customer Phone</label>
-                                                        <input type="text" class="form-control" required>
+                                                        <input type="text" class="form-control" name="user_phone" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -127,9 +133,10 @@
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
                                                         <label class="form-label">Payment Method</label>
-                                                        <select class="form-select">
+                                                        <select class="form-select" name="payment_method" required>
                                                             <option value="1">Skrill</option>
                                                             <option value="2">PayStack</option>
+                                                            <option value="3">Cash</option>
                                                         </select>
                                                     </div>
                                                 </div>

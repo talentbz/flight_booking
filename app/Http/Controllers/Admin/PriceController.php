@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\SeatType;
 use App\Models\PriceByCount;
 use App\Models\PriceByDate;
+use App\Models\Baggage;
 
 class PriceController extends Controller
 {
@@ -55,6 +56,23 @@ class PriceController extends Controller
                                 ->update([
                                     'percentage' => $request->percentage,
                                 ]);
+        return response()->json(['result' => 'success']);
+    }
+
+    public function baggageIndex(Request $request){
+        $baggage = Baggage::first();
+        return view('admin.pages.price.baggage.edit', [
+            'baggage' => $baggage,
+        ]);
+    }
+
+    public function baggageStore(Request $request)
+    {
+        Baggage::where('id', $request->id)
+                ->update([
+                    'price' => $request->price,
+                    'weight' => $request->weight,
+                ]);
         return response()->json(['result' => 'success']);
     }
 }

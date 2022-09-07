@@ -134,5 +134,11 @@ class DatabaseSeeder extends Seeder
                 'status'  => 1,
             ],
         ]);
+        DB::table('baggage')->insert([
+            [
+                'price'    => 45,
+                'weight'  => 23,
+            ],
+        ]);
     }
 }

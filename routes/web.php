@@ -40,6 +40,15 @@ Route::prefix('/admin')->middleware(['auth:web', 'Admin'])->group(function () {
         Route::get('/edit', [App\Http\Controllers\Admin\SeatController::class, 'edit'])->name('admin.seat.edit');
         Route::post('/edit', [App\Http\Controllers\Admin\SeatController::class, 'store'])->name('admin.seat.store');
     });
+    Route::prefix('/user')->group(function () {
+        Route::get('/', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('admin.user.index');
+        Route::get('/create', [App\Http\Controllers\Admin\UserController::class, 'create'])->name('admin.user.create');
+        Route::post('/store', [App\Http\Controllers\Admin\UserController::class, 'store'])->name('admin.user.store');
+        Route::get('/edit/{id}', [App\Http\Controllers\Admin\UserController::class, 'edit'])->name('admin.user.edit');
+        Route::post('/update/{id}', [App\Http\Controllers\Admin\UserController::class, 'update'])->name('admin.user.update');
+        Route::get('/status', [App\Http\Controllers\Admin\UserController::class, 'status'])->name('admin.user.status');
+        Route::post('/reset_password/{id}', [App\Http\Controllers\Admin\UserController::class, 'resetPassword'])->name('admin.user.reset_password');
+    });
     Route::prefix('/price')->group(function () {
         Route::get('/by_count', [App\Http\Controllers\Admin\PriceController::class, 'countIndex'])->name('admin.price.count_index');
         Route::get('/by_count_status', [App\Http\Controllers\Admin\PriceController::class, 'statusChange'])->name('admin.price.count_status');
@@ -47,6 +56,8 @@ Route::prefix('/admin')->middleware(['auth:web', 'Admin'])->group(function () {
         Route::get('/by_date', [App\Http\Controllers\Admin\PriceController::class, 'dateIndex'])->name('admin.price.date_index');
         Route::post('/by_date_store', [App\Http\Controllers\Admin\PriceController::class, 'dateStore'])->name('admin.price.date_store');
         Route::get('/by_date_status', [App\Http\Controllers\Admin\PriceController::class, 'dateStatusChange'])->name('admin.price.date_status');
+        Route::get('/baggage', [App\Http\Controllers\Admin\PriceController::class, 'baggageIndex'])->name('admin.price.baggage_index');
+        Route::post('/baggage', [App\Http\Controllers\Admin\PriceController::class, 'baggageStore'])->name('admin.price.baggage_store');
     });
     Route::prefix('/schedule')->group(function () {
         Route::get('/', [App\Http\Controllers\Admin\ScheduleController::class, 'index'])->name('admin.schedule.index');
