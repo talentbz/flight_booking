@@ -5,21 +5,22 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class Admin
+class Agent
 {
     /**
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
+     * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
+     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user()->role == 1){
+        if(auth()->user()->role == 2){
+            // return view('admin.booking.index');
             return $next($request);
-        } 
-        return redirect()->back();
+        }
         // return redirect('/')->with('error',"You don't have admin access.");
+        return back();
     }
 }

@@ -19,23 +19,65 @@
                     <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100 datatable">
                         <thead>
                             <tr>
-                                <th class="text-center">No</th>
-                                <th class="text-center">Name</th>
-                                <th class="text-center">Price</th>
-                                <th class="text-center">Seat Type</th>
-                                <th class="text-center">Status</th>           
-                                <th class="text-center">Action</th>
+                                <th class="text-center">Booking No</th>
+                                <th class="text-center">AirLine</th>
+                                <th class="text-center">Trip type</th>
+                                <th class="text-center">Departure Date</th>
+                                <th class="text-center">Return Date</th>           
+                                <th class="text-center">Departure Seat</th>           
+                                <th class="text-center">Return Seat</th>           
+                                <th class="text-center">Customer Name</th>
+                                <th class="text-center">Payment Type</th>
+                                <th class="text-center">Total Price</th>
+                                <th class="text-center">Agent</th>
+                                <th class="text-center">Booking Date</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($booking as $row)
                             <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>{{$row->booking_no}}</td>
+                                <td>{{$row->air_line_name}}</td>
+                                <td class="text-center">
+                                    @if($row->trip_type == 1)
+                                    <span class="badge badge-pill badge-soft-success font-size-12">Round Trip</span>
+                                    @elseif($row->trip_type == 2)
+                                    <span class="badge badge-pill badge-soft-primary font-size-12">OutBound</span>
+                                    @else
+                                    <span class="badge badge-pill badge-soft-info font-size-12">InBound</span>
+                                    @endif
+                                </td>
+                                <td>{{$row->start_date}}</td>
+                                <td>{{$row->return_date}}</td>
+                                <td>
+                                    @forelse(json_decode($row->start_seat) as $s_seat)
+                                        {{$s_seat}},   
+                                    @empty
+                                    
+                                    @endforelse
+                                </td>
+                                <td>
+                                    @forelse(json_decode($row->return_seat) as $r_seat)
+                                        {{$r_seat}},  
+                                    @empty
+                                        
+                                    @endforelse
+                                </td>
+                                <td>{{$row->user_name}}</td>
+                                <td>
+                                    @if($row->payment_type == 1)
+                                    <span class="badge badge-pill badge-soft-success font-size-12">Skrill</span>
+                                    @elseif($row->trip_type == 2)
+                                    <span class="badge badge-pill badge-soft-primary font-size-12">PayStack</span>
+                                    @else
+                                    <span class="badge badge-pill badge-soft-info font-size-12">Cash</span>
+                                    @endif
+                                </td>
+                                <td>{{$row->cost}}</td>
+                                <td>{{$row->name}}</td>
+                                <td>{{$row->created_at}}</td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

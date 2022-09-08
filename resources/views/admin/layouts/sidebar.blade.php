@@ -7,7 +7,7 @@
         <div id="sidebar-menu">
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
-
+                @if(Auth::user()->role == 1)
                 <li>
                     <a href="javascript: void(0);" class="waves-effect">
                         <i class="bx bx-home-circle"></i>
@@ -50,16 +50,6 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-receipt"></i>
-                        <span key="t-ecommerce">Booking History</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{route('admin.booking.index')}}" key="t-products">Booking List</a></li>
-                        <li><a href="javascript: void(0);" key="t-products">Price Management</a></li>
-                    </ul>
-                </li>
-                <li>
                     <a href="{{route('admin.schedule.index')}}" class="waves-effect">
                         <i class="bx bx-calendar"></i>
                         <span key="t-ecommerce">Schedule</span>
@@ -70,6 +60,17 @@
                         <i class="fas fa-plane"></i>
                         <span key="t-ecommerce">Airline</span>
                     </a>
+                </li>
+                @endif
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="bx bx-receipt"></i>
+                        <span key="t-ecommerce">Booking History</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{route('admin.booking.index')}}" key="t-products">Booking List</a></li>
+                        <li><a href="javascript: void(0);" key="t-products">Price Management</a></li>
+                    </ul>
                 </li>
             </ul>
         </div>

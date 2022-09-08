@@ -21,10 +21,17 @@ class BookingController extends Controller
         $user_id = Auth::id();
         $role = User::find($user_id);
         if($role->role == 1) {
-            $booking = Booking::get(); 
+            $booking = Booking::leftJoin('users', 'users.id', 'bookings.created_by')
+                              ->leftJoin('air_lines', 'air_lines.id', 'bookings.air_line')
+                              ->select('bookings.*', 'users.name', 'air_lines.name as air_line_name')->get(); 
         } else {
-            $booking = Booking::where('created_by', $user_id)->get();
+            $booking = Booking::leftJoin('users', 'users.id', 'bookings.created_by')
+                              ->leftJoin('air_lines', 'air_lines.id', 'bookings.air_line')
+                              ->where('bookings.created_by', $user_id)
+                              ->select('bookings.*', 'users.name', 'air_lines.name as air_line_name')
+                              ->get();
         }
+        // dd(json_decode($booking[0]->return_seat));
         return view('admin.pages.booking.index', [
             'booking' => $booking,
         ]);
@@ -83,6 +90,8 @@ class BookingController extends Controller
         $seat_type = SeatType::get();
         $bussiness_seat = [];
         $economy_seat = [];
+        $bussiness_seat_percent = 0;
+        $economy_seat_percent = 0;
         $percentage = 0;
         $total_seat_number = [];
         $trip_type = $request->trip_type;
@@ -90,12 +99,16 @@ class BookingController extends Controller
             $get_seat = Booking::where('start_date', $schedule->departure_date)->get();
             $departure_date = Carbon::parse($schedule->departure_date);
             $departure_diff=$current_date->diffInDays($departure_date);
+
+            //get percetage by date
             foreach($price_by_date as $row){
                 if($departure_diff == $row->date){
                     $percentage = $row->percentage;
                     break;
                 }
             }
+
+            // get exsiting seat
             foreach($get_seat as $row){
                 $seats = json_decode($row->start_seat);
                 foreach($seats as $seat){
@@ -109,6 +122,10 @@ class BookingController extends Controller
                     }
                 }
             }
+
+            //get percetage by bussiness seat count
+            
+            
             // dd($bussiness_seat);
         } else {
             $get_seat = Booking::where('return_date', $schedule->return_date)->get();
