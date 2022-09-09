@@ -168,5 +168,6 @@
         schedule = "{{route('admin.booking.schedule')}}";
         seat_map = "{{route('admin.booking.seat_map')}}";
         store = "{{route('admin.booking.store')}}";
+        list_url = "{{route('admin.booking.index')}}";
     </script>
 @endsection
