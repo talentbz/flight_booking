@@ -106,6 +106,7 @@ $(document).ready(function () {
         seat =[];
         price_array = [];
         out_bound_price = 0;
+        $('input[name="extra_bag"]').val('');
         $("input[name='out_bound']").val('');
         $("input[name='total_price']").val(in_bound_price + out_bound_price);
         getSeatMap(shedule_id, 'outBound')
@@ -114,6 +115,7 @@ $(document).ready(function () {
         seat =[];
         price_array = [];
         in_bound_price = 0;
+        $('input[name="extra_bag"]').val('');
         $("input[name='in_bound']").val('');
         $("input[name='total_price']").val(in_bound_price + out_bound_price);
         getSeatMap(shedule_id, 'inBound')
@@ -156,6 +158,7 @@ $(document).ready(function () {
         price_array = [];
         out_bound_price = 0;
         in_bound_price = 0;
+        total_price = 0;
         $('input[name="extra_bag"]').val('');
     }
     $('#custom-form').submit(function(e){
