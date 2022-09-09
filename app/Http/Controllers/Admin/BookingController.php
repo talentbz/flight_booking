@@ -7,9 +7,11 @@ use Illuminate\Http\Request;
 use App\Models\Schedule;
 use App\Models\SeatType;
 use App\Models\PriceByDate;
+use App\Models\PriceByCount;
 use App\Models\Booking;
 use App\Models\AirLine;
 use App\Models\User;
+use App\Models\Baggage;
 use Carbon\Carbon;
 use Auth;
 
@@ -43,10 +45,12 @@ class BookingController extends Controller
         $seat_type = SeatType::get();
         $airline = AirLine::where('status', 1)->get();
         $price_by_date = PriceByDate::where('status', 1)->get();
+        $bag = Baggage::first();
         return view('admin.pages.booking.create', [
             'schedule' => $schedule,
             'seat_type' => $seat_type,
             'airline' => $airline,
+            'bag' => $bag,
         ]);
     }
     public function store(Request $request)
@@ -87,6 +91,7 @@ class BookingController extends Controller
         $current_date = Carbon::parse(Carbon::now()->format('Y-m-d'));
         $schedule = Schedule::findOrFail($request->shedule_id);
         $price_by_date = PriceByDate::where('status', 1)->get();
+        $price_by_count = PriceByCount::get();
         $seat_type = SeatType::get();
         $bussiness_seat = [];
         $economy_seat = [];
@@ -95,7 +100,7 @@ class BookingController extends Controller
         $percentage = 0;
         $total_seat_number = [];
         $trip_type = $request->trip_type;
-        if($trip_type == "inBound"){
+        if($trip_type == "outBound"){
             $get_seat = Booking::where('start_date', $schedule->departure_date)->get();
             $departure_date = Carbon::parse($schedule->departure_date);
             $departure_diff=$current_date->diffInDays($departure_date);
@@ -124,9 +129,27 @@ class BookingController extends Controller
             }
 
             //get percetage by bussiness seat count
-            
-            
-            // dd($bussiness_seat);
+            $bussiness_seat_count = count($bussiness_seat);
+            if($bussiness_seat_count > 10 && $bussiness_seat_count <= 20){
+                $bussiness_seat_percent = $price_by_count[1]->percentage;
+            } else if($bussiness_seat_count > 20 && $bussiness_seat_count <= 30){
+                $bussiness_seat_percent = $price_by_count[2]->percentage;
+            } else {
+                $bussiness_seat_percent = $price_by_count[0]->percentage;
+            }
+
+             //get percetage by economy seat count
+             $economy_seat_percent = count($economy_seat);
+             if($economy_seat_percent > 40 && $economy_seat_percent <= 90){
+                 $economy_seat_percent = $price_by_count[4]->percentage;
+             } else if($economy_seat_percent > 90 && $economy_seat_percent <= 140){
+                 $economy_seat_percent = $price_by_count[5]->percentage;
+             } else if($economy_seat_percent > 141 && $economy_seat_percent <= 190){
+                 $economy_seat_percent = $price_by_count[6]->percentage;
+             } else {
+                $economy_seat_percent = $price_by_count[3]->percentage;
+             }
+
         } else {
             $get_seat = Booking::where('return_date', $schedule->return_date)->get();
             $return_date = Carbon::parse($schedule->return_date);
@@ -150,14 +173,44 @@ class BookingController extends Controller
                     }
                 }
             }
+
+            //get percetage by bussiness seat count
+            $bussiness_seat_count = count($bussiness_seat);
+            if($bussiness_seat_count > 10 && $bussiness_seat_count <= 20){
+                $bussiness_seat_percent = $price_by_count[1]->percentage;
+            } else if($bussiness_seat_count > 20 && $bussiness_seat_count <= 30){
+                $bussiness_seat_percent = $price_by_count[2]->percentage;
+            } else {
+                $bussiness_seat_percent = $price_by_count[0]->percentage;
+            }
+
+             //get percetage by economy seat count
+             $economy_seat_percent = count($economy_seat);
+             if($economy_seat_percent > 40 && $economy_seat_percent <= 90){
+                 $economy_seat_percent = $price_by_count[4]->percentage;
+             } else if($economy_seat_percent > 90 && $economy_seat_percent <= 140){
+                 $economy_seat_percent = $price_by_count[5]->percentage;
+             } else if($economy_seat_percent > 141 && $economy_seat_percent <= 190){
+                 $economy_seat_percent = $price_by_count[6]->percentage;
+             } else {
+                $economy_seat_percent = $price_by_count[3]->percentage;
+             }
+             
         }
+        $bussiness_price = (int)$seat_type[0]->price + (int)$seat_type[0]->price*(int)$percentage/100 + (int)$seat_type[0]->price*(int)$bussiness_seat_percent/100;
+        $economy_price = (int)$seat_type[1]->price + (int)$seat_type[1]->price*(int)$percentage/100 + (int)$seat_type[1]->price*(int)$economy_seat_percent/100;
+        
         return view('admin.pages.booking.seatmap', [
-            'percentage' => $percentage, 
+            'percentage' => (int)$percentage, 
             'bussiness_seat' => $bussiness_seat,
             'economy_seat' => $economy_seat,
             'seat_type' => $seat_type,
             'total_seat_number' => $total_seat_number,
-            'trip_type' => $trip_type
+            'trip_type' => $trip_type,
+            'economy_seat_percent' => (int)$economy_seat_percent,
+            'bussiness_seat_percent' => (int)$bussiness_seat_percent,
+            'bussiness_price' => $bussiness_price,
+            'economy_price' => $economy_price,
         ]);
     }
 }

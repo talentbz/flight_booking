@@ -78,20 +78,8 @@
                                         </div>
                                         <div class="seat_section">
                                             <div class="row">
-                                                <div class="col-md-6 in_bound">
-                                                    <!-- <div class="mb-3">
-                                                        <label class="form-label">InRound</label>
-                                                        <a href="javascript:void(0)" class="inround_seat_map">view seat map</a>
-                                                        <input type="text" class="form-control" name="in_round[]" readonly required>
-                                                    </div> -->
-                                                </div>
-                                                <div class="col-md-6 out_bound">
-                                                    <!-- <div class="mb-3">
-                                                        <label class="form-label">OutRound</label>
-                                                        <a href="javascript:void(0)" class="outround_seat_map">view seat map</a>
-                                                        <input type="text" class="form-control" name="out_round[]" readonly required>
-                                                    </div> -->
-                                                </div>
+                                                <div class="col-md-6 out_bound"></div>
+                                                <div class="col-md-6 in_bound"></div>
                                             </div>
                                         </div>
                                         <div class="customer_info">
@@ -123,6 +111,14 @@
                                             <div class="row">
                                                 <div class="mb-3 mt-4">
                                                     <h4>Payment Info</h4>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Extra bags({{$bag->price}}USD per {{$bag->weight}}Kg)</label>
+                                                        <input type="hidden" class="bag_value" value="{{$bag->price}}">
+                                                        <input type="hidden" class="bag_price" value="">
+                                                        <input type="number" min="0" step="1" class="form-control bag_number" name="extra_bag" >
+                                                    </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
