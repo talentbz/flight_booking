@@ -61,6 +61,12 @@
                         <span key="t-ecommerce">Airline</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{route('admin.approve.index')}}" class="waves-effect approve_count">
+                        <i class="fas fa-plane"></i>
+                        <span key="t-ecommerce">Apporve List</span>
+                    </a>
+                </li>
                 @endif
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">

@@ -135,6 +135,21 @@ $(document).ready(function () {
         $("input[name='total_price']").val(add_baggage + total_price);
         
     });
+
+    //aprove_button pr save_button check
+    $('.aprove_button').hide()
+    $("select[name='payment_method']").on('change', function(e){
+        payment_method = $(this).find(":selected").val()
+        if(payment_method == 3){
+            $('.aprove_button').show()
+            $('.save_button').hide()
+        } else {
+            $('.aprove_button').hide()
+            $('.save_button').show()
+        }
+    })
+
+
     function getSeatMap(shedule_id, trip_type) {
         $.ajax({
             url: seat_map,
@@ -170,24 +185,47 @@ $(document).ready(function () {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        $.ajax({
-            url: store,
-            method: 'post',
-            data: formData,
-            success: function (res) {
-                if(res.result == "success" ){
-                    toastr["success"]("Success!!!");
-                    setInterval(function(){ 
-                        location.href = list_url; 
-                    }, 2000);
-                }
-            },
-            error: function (errors){
-                toastr["warning"](errors);
-            },
-            cache: false,
-            contentType: false,
-            processData: false
-        })
+        var payment_method = $('select[name="payment_method"]').find(":selected").val()
+
+        // if payment method is cash, then store data to aprove table,
+        // else store to booking table
+        if(payment_method == 3) {
+            $.ajax({
+                url: aprove_store,
+                method: 'post',
+                data: formData,
+                success: function (res) {
+                    if(res.result == "success" ){
+                        toastr["success"]("Success!!!");
+                    }
+                },
+                error: function (errors){
+                    toastr["warning"](errors);
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            })
+        } else {
+            $.ajax({
+                url: booking_store,
+                method: 'post',
+                data: formData,
+                success: function (res) {
+                    if(res.result == "success" ){
+                        toastr["success"]("Success!!!");
+                        setInterval(function(){ 
+                            location.href = list_url; 
+                        }, 2000);
+                    }
+                },
+                error: function (errors){
+                    toastr["warning"](errors);
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            })
+        }
     })
 })

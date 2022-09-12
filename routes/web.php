@@ -73,6 +73,11 @@ Route::prefix('/admin')->middleware(['auth:web'])->group(function () {
             Route::post('/store', [App\Http\Controllers\Admin\AirlineController::class, 'store'])->name('admin.airline.store');
             Route::get('/status', [App\Http\Controllers\Admin\AirlineController::class, 'status'])->name('admin.airline.status');
         });
+        Route::prefix('/approve')->group(function () {
+            Route::get('/', [App\Http\Controllers\Admin\ApproveController::class, 'index'])->name('admin.approve.index');
+            Route::get('/count', [App\Http\Controllers\Admin\ApproveController::class, 'count'])->name('admin.approve.count');
+            Route::get('/status', [App\Http\Controllers\Admin\ApproveController::class, 'status'])->name('admin.approve.status');
+        });
     });
     
     Route::prefix('/booking')->group(function () {
@@ -81,5 +86,6 @@ Route::prefix('/admin')->middleware(['auth:web'])->group(function () {
         Route::post('/store', [App\Http\Controllers\Admin\BookingController::class, 'store'])->name('admin.booking.store');
         Route::get('/seat_map', [App\Http\Controllers\Admin\BookingController::class, 'seatMap'])->name('admin.booking.seat_map');
         Route::get('/schedule', [App\Http\Controllers\Admin\BookingController::class, 'schedule'])->name('admin.booking.schedule');
+        Route::post('/approve/store', [App\Http\Controllers\Admin\ApproveController::class, 'store'])->name('admin.booking.approve.store');
     });
 });

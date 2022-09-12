@@ -107,3 +107,23 @@ aria-labelledby="myLargeModalLabel" aria-hidden="true">
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+<script>
+    $(document).ready(function () {
+        var approve_count = "{{route('admin.approve.count')}}";
+        $.ajax({
+            url: approve_count,
+            method: 'get',
+            dataType: 'json',
+            success: function (res) {
+                result = res.count;
+                html = '<span class="badge rounded-pill bg-danger float-end">'+ result +'</span>'
+                if(result>0){
+                    $('.approve_count').append(html);
+                }
+            },
+            error: function (res){
+                console.log(res)
+            },
+        })
+    })
+</script>

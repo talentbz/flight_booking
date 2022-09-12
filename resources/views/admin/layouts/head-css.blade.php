@@ -10,3 +10,4 @@
 <link href="{{ URL::asset('/assets/libs/datatables/datatables.min.css') }}" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('/assets/libs/toastr/toastr.min.css') }}">
 <link rel="stylesheet" href="{{ URL::asset('/assets/admin/style.css')}}" rel="stylesheet" type="text/css" >
+<script src="{{ URL::asset('assets/libs/jquery/jquery.min.js')}}"></script>

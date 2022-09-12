@@ -139,7 +139,8 @@
                                             </div>
                                         </div>
                                         <div class="mb-3 text-end">
-                                            <button type="submite" class="btn btn-primary">Save</button>
+                                            <button type="submite" class="btn btn-primary aprove_button">Send to Admin</button>
+                                            <button type="submite" class="btn btn-primary save_button">Save</button>
                                         </div>
                                     </div>
                                 </div>
@@ -167,7 +168,8 @@
     <script>
         schedule = "{{route('admin.booking.schedule')}}";
         seat_map = "{{route('admin.booking.seat_map')}}";
-        store = "{{route('admin.booking.store')}}";
+        booking_store = "{{route('admin.booking.store')}}";
+        aprove_store = "{{route('admin.booking.approve.store')}}";
         list_url = "{{route('admin.booking.index')}}";
     </script>
 @endsection
