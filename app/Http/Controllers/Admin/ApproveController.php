@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Schedule;
 use App\Models\Approve;
 use Auth;
+use Mail;
 
 class ApproveController extends Controller
 {
