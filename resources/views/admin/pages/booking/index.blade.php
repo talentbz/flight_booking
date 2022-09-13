@@ -67,7 +67,7 @@
                                 <td>
                                     @if($row->payment_type == 1)
                                     <span class="badge badge-pill badge-soft-success font-size-12">Skrill</span>
-                                    @elseif($row->trip_type == 2)
+                                    @elseif($row->payment_type == 2)
                                     <span class="badge badge-pill badge-soft-primary font-size-12">PayStack</span>
                                     @else
                                     <span class="badge badge-pill badge-soft-info font-size-12">Cash</span>

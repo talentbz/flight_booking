@@ -107,10 +107,10 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="payment_info">
+                                        <div class="service">
                                             <div class="row">
-                                                <div class="mb-3 mt-4">
-                                                    <h4>Payment Info</h4>
+                                                <div class="mb-3">
+                                                    <h4>Extra Service</h4>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
@@ -120,6 +120,14 @@
                                                         <input type="number" min="0" step="1" class="form-control bag_number" name="extra_bag" >
                                                     </div>
                                                 </div>
+                                            </div>
+                                        </div>
+                                        <div class="payment_info">
+                                            <div class="row">
+                                                <div class="mb-3 mt-4">
+                                                    <h4>Payment Info</h4>
+                                                </div>
+                                                
                                                 <div class="col-md-6">
                                                     <div class="mb-3">
                                                         <label class="form-label">Total Cost</label>

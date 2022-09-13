@@ -62,9 +62,9 @@ class BookingController extends Controller
         $booking->air_line = $request->air_line;
         $booking->schedule_id = $request->booking_schedule;
         $booking->trip_type = $request->trip_type;
-        $booking->start_seat = json_encode(explode( ",", $request->in_bound ));
+        $booking->start_seat = json_encode(explode( ",", $request->out_bound ));
         $booking->start_date = $schedule->departure_date;
-        $booking->return_seat = json_encode(explode( ",", $request->out_bound ));
+        $booking->return_seat = json_encode(explode( ",", $request->in_bound ));
         $booking->return_date = $schedule->return_date;
         $booking->user_email = $request->user_email;
         $booking->user_name = $request->user_name;
@@ -130,6 +130,12 @@ class BookingController extends Controller
 
             //get percetage by bussiness seat count
             $bussiness_seat_count = count($bussiness_seat);
+            // $test = PriceByCount::where('min_count', '>=', 0)
+            //                     ->where('max_count', '<=', 0)  
+            //                     ->where('status', 1)
+            //                     ->where('seat_type_id', 1)
+            //                     ->get();
+            //      dd($test);       
             if($bussiness_seat_count > 10 && $bussiness_seat_count <= 20){
                 $bussiness_seat_percent = $price_by_count[1]->percentage;
             } else if($bussiness_seat_count > 20 && $bussiness_seat_count <= 30){

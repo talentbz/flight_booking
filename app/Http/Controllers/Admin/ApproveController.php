@@ -29,9 +29,9 @@ class ApproveController extends Controller
         $approve->air_line = $request->air_line;
         $approve->schedule_id = $request->booking_schedule;
         $approve->trip_type = $request->trip_type;
-        $approve->start_seat = json_encode(explode( ",", $request->in_bound ));
+        $approve->start_seat = json_encode(explode( ",", $request->out_bound ));
         $approve->start_date = $schedule->departure_date;
-        $approve->return_seat = json_encode(explode( ",", $request->out_bound ));
+        $approve->return_seat = json_encode(explode( ",", $request->in_bound ));
         $approve->return_date = $schedule->return_date;
         $approve->user_email = $request->user_email;
         $approve->user_name = $request->user_name;

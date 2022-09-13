@@ -63,7 +63,7 @@
                 </li>
                 <li>
                     <a href="{{route('admin.approve.index')}}" class="waves-effect approve_count">
-                        <i class="fas fa-plane"></i>
+                        <i class="fas fa-check-circle"></i>
                         <span key="t-ecommerce">Apporve List</span>
                     </a>
                 </li>
@@ -75,7 +75,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{route('admin.booking.index')}}" key="t-products">Booking List</a></li>
-                        <li><a href="javascript: void(0);" key="t-products">Price Management</a></li>
+                        <!-- <li><a href="javascript: void(0);" key="t-products">Price Management</a></li> -->
                     </ul>
                 </li>
             </ul>

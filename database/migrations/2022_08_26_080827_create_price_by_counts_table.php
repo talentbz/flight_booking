@@ -17,6 +17,8 @@ class CreatePriceByCountsTable extends Migration
             $table->id();
             $table->string('seat_count');
             $table->string('percentage');
+            $table->integer('min_count');
+            $table->integer('max_count');
             $table->integer('seat_type_id');
             $table->boolean('status')->default(1);
             $table->timestamps();
