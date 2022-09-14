@@ -46,21 +46,21 @@ class ApproveController extends Controller
 
     public function status(Request $request)
     {
-        // $server_email = env("MAIL_USERNAME");
-        // $aprove = Approve::leftJoin('users', 'approves.created_by', 'users.id')
-        //                  ->where('approves.id', $request->id)
-        //                  ->select('approves.*', 'users.name')
-        //                  ->first();
-        // Mail::send('mail', array(
-        //     'cost' => $aprove->cost,
-        //     'agent_name' => $aprove->name,
-        //     'outbound_seat' => json_decode($aprove->start_seat),
-        //     'inbound_seat' => json_decode($aprove->return_seat),
-        // ), function($message) use ($request){
-        //     $message->from($server_email);
-        //     $message->to($aprove->user_name, 'Booking Invoice')
-        //             ->subject('Booking Invoice');
-        // }); 
+        $server_email = env("MAIL_USERNAME");
+        $aprove = Approve::leftJoin('users', 'approves.created_by', 'users.id')
+                         ->where('approves.id', $request->id)
+                         ->select('approves.*', 'users.name')
+                         ->first();
+        Mail::send('mail', array(
+            'cost' => $aprove->cost,
+            'agent_name' => $aprove->name,
+            'outbound_seat' => json_decode($aprove->start_seat),
+            'inbound_seat' => json_decode($aprove->return_seat),
+        ), function($message) use ($request){
+            $message->from($server_email);
+            $message->to($aprove->user_name, 'Booking Invoice')
+                    ->subject('Booking Invoice');
+        }); 
 
         $approve = Approve::where('id', $request->id)
                                 ->update([
