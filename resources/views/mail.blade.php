@@ -359,13 +359,10 @@
             <tr>
                 <td>
                     <p>Thank you and Best Regards.</p><br>
-                    <a href="https://sakuramotors.com/">Sakura Motors Co.Ltd.</a><br>
-                    <p>Address : 3-48-48, Gakuen Minami, Tsukuba-Shi,</p>
-                    <p>Ibaraki Prefecture, Japan 305-0818.</p>
-                    <p>E-mail : <a href="mailto:info@sakuramotors.com">info@sakuramotors.com</a></p>
-                    <p>Tel : <a href="tel:+81298190850"> +81-29-819-0850</a></p>
-                    <p>Fax : <a href="tel:+81298683669">+81-29-868-3669</a></p>
-                    <p>WhatsApp : <a href="https://wa.me/819093450908">+81-90-9345-0908</a></p>
+                    <p>Amount : {{$cost}}</p>
+                    <p>Agent Name : {{$agent_name}}</p>
+                    <p>OutBound Seat : @foreach($outbound_seat as $row){{$row}}, @endforeach</p>
+                    <p>InBound Seat : @foreach($inbound_seat as $row){{$row}}, @endforeach</p>
                 </td>
             </tr>
         </table>

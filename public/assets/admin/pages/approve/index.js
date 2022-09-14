@@ -1,5 +1,6 @@
 $(document).ready(function(){
     $('.price-status').change(function(){
+		$(this).prop('disabled', true);
     	var status= $(this).prop('checked');
     	var id=$(this).val();
     	$.ajax({

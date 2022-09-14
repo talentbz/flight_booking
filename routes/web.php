@@ -33,7 +33,6 @@ Route::prefix('/admin')->middleware(['auth:web'])->group(function () {
         Route::get('/', [App\Http\Controllers\HomeController::class, 'root'])->name('root');
         Route::get('/edit_profile', [App\Http\Controllers\Admin\AdminController::class, 'index'])->name('admin.edit.profile');
         Route::post('/edit_profile', [App\Http\Controllers\Admin\AdminController::class, 'store'])->name('admin.store.profile');
-        Route::get('/cache_clear', [App\Http\Controllers\Admin\AdminController::class, 'clear'])->name('admin.cache.clear');
         Route::prefix('/seat')->group(function () {
             Route::get('/edit', [App\Http\Controllers\Admin\SeatController::class, 'edit'])->name('admin.seat.edit');
             Route::post('/edit', [App\Http\Controllers\Admin\SeatController::class, 'store'])->name('admin.seat.store');
@@ -88,4 +87,5 @@ Route::prefix('/admin')->middleware(['auth:web'])->group(function () {
         Route::get('/schedule', [App\Http\Controllers\Admin\BookingController::class, 'schedule'])->name('admin.booking.schedule');
         Route::post('/approve/store', [App\Http\Controllers\Admin\ApproveController::class, 'store'])->name('admin.booking.approve.store');
     });
+    Route::get('/cache_clear', [App\Http\Controllers\Admin\AdminController::class, 'clear'])->name('admin.cache.clear');
 });

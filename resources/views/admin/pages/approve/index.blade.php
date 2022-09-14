@@ -64,7 +64,7 @@
                                 <td>{{$row->created_at}}</td>
                                 <td>
                                     <div class="form-check form-switch form-switch-lg text-center">
-                                        <input class="form-check-input price-status" type="checkbox" {{$row->status == 1 ? "checked" :""}} value="{{$row->id}}" >
+                                        <input class="form-check-input price-status" type="checkbox" {{$row->status == 1 ? "checked disabled" :""}} value="{{$row->id}}">
                                     </div>
                                 </td>
                             </tr>

@@ -46,27 +46,22 @@ class ApproveController extends Controller
 
     public function status(Request $request)
     {
-        Mail::send('mail', array(
-            // 'is_contact'  =>'off',
-            // 'vehicle_name' => $request->get('vehicle_name'),
-            // 'fob_price' => $request->get('fob_price'),
-            // 'inspection' => $request->get('inspection'),
-            // 'insurance' => $request->get('insurance'),
-            // 'inqu_port' => $request->get('inqu_port'),
-            // 'total_price' => $request->get('total_price'),
-            // 'site_url' => $request->get('site_url'),
-            // 'inqu_name' => $request->get('inqu_name'),
-            // 'inqu_country' => $request->get('inqu_country'),
-            // 'inqu_email' => $request->get('inqu_email'),
-            // 'inqu_address' => $request->get('inqu_address'),
-            // 'inqu_mobile' => $request->get('inqu_mobile'),
-            // 'inqu_city' => $request->get('inqu_city'),
-            // 'inqu_comment' => $request->get('inqu_comment'),
-        ), function($message) use ($request){
-            $message->from('test@topkidghana.net');
-            $message->to('vadim.progev@gmail.com', 'Inquiry - Sakura')
-                    ->subject('Inquiry - Sakura');
-        }); 
+        // $server_email = env("MAIL_USERNAME");
+        // $aprove = Approve::leftJoin('users', 'approves.created_by', 'users.id')
+        //                  ->where('approves.id', $request->id)
+        //                  ->select('approves.*', 'users.name')
+        //                  ->first();
+        // Mail::send('mail', array(
+        //     'cost' => $aprove->cost,
+        //     'agent_name' => $aprove->name,
+        //     'outbound_seat' => json_decode($aprove->start_seat),
+        //     'inbound_seat' => json_decode($aprove->return_seat),
+        // ), function($message) use ($request){
+        //     $message->from($server_email);
+        //     $message->to($aprove->user_name, 'Booking Invoice')
+        //             ->subject('Booking Invoice');
+        // }); 
+
         $approve = Approve::where('id', $request->id)
                                 ->update([
                                     'status' => toBoolean($request->status),
@@ -78,7 +73,7 @@ class ApproveController extends Controller
 
     public function count(Request $request)
     {
-        $approve_count = count(Approve::get());
+        $approve_count = count(Approve::where('status', 0)->get());
         return response()->json(['count' => $approve_count]);
     }
 }

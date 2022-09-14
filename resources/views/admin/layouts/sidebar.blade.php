@@ -78,6 +78,12 @@
                         <!-- <li><a href="javascript: void(0);" key="t-products">Price Management</a></li> -->
                     </ul>
                 </li>
+                <li>
+                    <a href="{{route('admin.cache.clear')}}" class="waves-effect">
+                        <i class="fas fa-redo"></i>
+                        <span key="t-ecommerce">Cache Clear</span>
+                    </a>
+                </li>
             </ul>
         </div>
         <!-- Sidebar -->
