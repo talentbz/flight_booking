@@ -53,6 +53,7 @@ class ApproveController extends Controller
         Mail::send('mail', array(
             'cost' => $aprove->cost,
             'agent_name' => $aprove->name,
+            'agent_no' => $aprove->created_by,
             'outbound_seat' => json_decode($aprove->start_seat),
             'inbound_seat' => json_decode($aprove->return_seat),
         ), function($message) use ($aprove){
