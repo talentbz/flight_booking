@@ -191,7 +191,7 @@ $(document).ready(function () {
         // else store to booking table
         if(payment_method == 3 && $('.save_button').is(":visible")) {
             $.ajax({
-                url: aprove_store,
+                url: booking_store,
                 method: 'post',
                 data: formData,
                 success: function (res) {
@@ -211,7 +211,7 @@ $(document).ready(function () {
             })
         } else if (payment_method == 3){
             $.ajax({
-                url: booking_store,
+                url: aprove_store,
                 method: 'post',
                 data: formData,
                 success: function (res) {
