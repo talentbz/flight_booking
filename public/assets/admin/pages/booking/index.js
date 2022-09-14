@@ -189,7 +189,7 @@ $(document).ready(function () {
 
         // if payment method is cash, then store data to aprove table,
         // else store to booking table
-        if(payment_method == 3) {
+        if(payment_method == 3 && $('.save_button').is(":visible")) {
             $.ajax({
                 url: aprove_store,
                 method: 'post',
@@ -197,6 +197,28 @@ $(document).ready(function () {
                 success: function (res) {
                     if(res.result == "success" ){
                         toastr["success"]("Success!!!");
+                    }
+                    setInterval(function(){ 
+                        location.href = list_url; 
+                    }, 2000);
+                },
+                error: function (errors){
+                    toastr["warning"](errors);
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            })
+        } else if (payment_method == 3){
+            $.ajax({
+                url: booking_store,
+                method: 'post',
+                data: formData,
+                success: function (res) {
+                    if(res.result == "success" ){
+                        toastr["success"]("Success!!!");
+                        $('.aprove_button').hide()
+                        $('.save_button').show()
                     }
                 },
                 error: function (errors){
@@ -206,7 +228,8 @@ $(document).ready(function () {
                 contentType: false,
                 processData: false
             })
-        } else {
+        } 
+        else {
             $.ajax({
                 url: booking_store,
                 method: 'post',
