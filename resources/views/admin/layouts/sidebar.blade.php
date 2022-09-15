@@ -64,7 +64,7 @@
                 <li>
                     <a href="{{route('admin.approve.index')}}" class="waves-effect approve_count">
                         <i class="fas fa-check-circle"></i>
-                        <span key="t-ecommerce">Apporve List</span>
+                        <span key="t-ecommerce">Aporve List</span>
                     </a>
                 </li>
                 @endif

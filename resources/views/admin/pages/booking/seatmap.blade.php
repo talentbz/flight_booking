@@ -6,7 +6,7 @@
             <li class="row--{{$i}}">
                 <ol class="seats">
                     <li class="seat invisible business_seat">
-                        <input type="checkbox" {{in_array($i."A", $bussiness_seat, true) ? "disabled" : ""}} id="{{$i}}A" value="{{$bussiness_price}}" />
+                        <input type="checkbox" {{in_array($i."A", $bussiness_seat, true) ? "disabled" : ""}} id="{{$i}}A" class="bussiness_price" value="{{$bussiness_price}}" />
                         <label for="{{$i}}A">{{$i}}A</label>
                     </li>
                     <li class="seat invisible business_seat">
@@ -80,7 +80,7 @@
             <li class="row--{{$i}}">
                 <ol class="seats">
                     <li class="seat">
-                        <input type="checkbox" {{in_array($i."A", $economy_seat, true) ? "disabled" : ""}} id="{{$i}}A" value="{{$economy_price}}"/>
+                        <input type="checkbox" {{in_array($i."A", $economy_seat, true) ? "disabled" : ""}} id="{{$i}}A" class="economy_price" value="{{$economy_price}}"/>
                         <label for="{{$i}}A">{{$i}}A</label>
                     </li>
                     <li class="seat">

@@ -21,6 +21,10 @@
                 <div class="card-body">
                     <form class="custom-validation" action="" id="custom-form">
                         @csrf
+                        <input type="hidden" name="outbound_bussiness_seat">
+                        <input type="hidden" name="inbound_bussiness_seat">
+                        <input type="hidden" name="outbound_economy_seat">
+                        <input type="hidden" name="inbound_economy_seat">
                         <div class="row">
                             <div class="col-md-6 seat_map_layout">
                                 

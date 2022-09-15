@@ -76,6 +76,8 @@ Route::prefix('/admin')->middleware(['auth:web'])->group(function () {
             Route::get('/', [App\Http\Controllers\Admin\ApproveController::class, 'index'])->name('admin.approve.index');
             Route::get('/count', [App\Http\Controllers\Admin\ApproveController::class, 'count'])->name('admin.approve.count');
             Route::get('/status', [App\Http\Controllers\Admin\ApproveController::class, 'status'])->name('admin.approve.status');
+            Route::get('/pdf_view', [App\Http\Controllers\Admin\ApproveController::class, 'pdfView'])->name('admin.approve.pdf_view');
+            Route::get('/pdf_create', [App\Http\Controllers\Admin\ApproveController::class, 'pdfCreate'])->name('admin.approve.pdf_create');
         });
     });
     

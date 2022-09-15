@@ -15,7 +15,7 @@
 
                 <a href="{{route('root')}}" class="logo logo-light">
                     <span class="logo-sm">
-                        <img src="{{ asset('/images/admin/logo.png') }}" alt="" height="22">
+                        <img src="{{ asset('/images/admin/logo.png') }}" alt="" height="50">
                     </span>
                     <span class="logo-lg">
                         <img src="{{ asset('/images/admin/logo.png') }}" class="mt-3" alt="" height="70">

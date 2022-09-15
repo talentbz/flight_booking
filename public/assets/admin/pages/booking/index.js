@@ -17,20 +17,23 @@ $(document).ready(function () {
             seat.splice($.inArray(seat_no, seat), 1);
             price_array.splice($.inArray(seat_price, price_array), 1)
         }
-        console.log(seat);
-        console.log(price_array);
         total_price_test = price_array.reduce(function(a, b){
-            return parseInt(a, 10) + parseInt(b, 10);
+            return parseFloat(a, 10) + parseFloat(b, 10);
         }, 0);
 
 
         if($(".trip_type_value").val() == "inBound") {
             $("input[name='in_bound']").val(seat);
             in_bound_price = total_price_test;
-            console.log('bussiness_total_price:' + in_bound_price)
+            //set inbound bussiness seat and economy price in hidden input
+            $("input[name='inbound_bussiness_seat']").val($('.bussiness_price').val())
+            $("input[name='inbound_economy_seat']").val($('.economy_price').val())
         } else {
             $("input[name='out_bound']").val(seat);
             out_bound_price = total_price_test
+            //set outbound bussiness seat and economy price in hidden input
+            $("input[name='outbound_bussiness_seat']").val($('.bussiness_price').val())
+            $("input[name='outbound_economy_seat']").val($('.economy_price').val())
         }
         total_price = in_bound_price + out_bound_price
         $("input[name='total_price']").val(total_price);
@@ -121,11 +124,7 @@ $(document).ready(function () {
         getSeatMap(shedule_id, 'inBound')
     })
     //get baggage price
-    $(".bag_number" ).keyup(function() {
-        // get_total_price = total_price
-        // if(!get_total_price){
-        //     get_total_price = 0
-        // }
+    $(".bag_number" ).change(function() {
         bag_number = $(".bag_number").val() 
         if(!bag_number){
             bag_number = 0

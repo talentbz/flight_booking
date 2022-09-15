@@ -55,7 +55,6 @@ class BookingController extends Controller
     }
     public function store(Request $request)
     {
-        // $pieces = explode(",", $request->in_bound);
         $schedule = Schedule::findOrFail($request->booking_schedule);
         $booking = new Booking;
         $booking->booking_no = $request->booking_no;
@@ -70,6 +69,11 @@ class BookingController extends Controller
         $booking->user_name = $request->user_name;
         $booking->phone = $request->user_phone;
         $booking->cost = $request->total_price;
+        $booking->outbound_bussiness_cost = $request->outbound_bussiness_seat;
+        $booking->outbound_economy_cost = $request->outbound_economy_seat;
+        $booking->inbound_bussiness_cost = $request->inbound_bussiness_seat;
+        $booking->inbound_economy_cost = $request->inbound_economy_seat;
+        $booking->baggage_count = $request->extra_bag;
         $booking->payment_type = $request->payment_method;
         $booking->payment_status = 1;
         $booking->created_by = Auth::id();

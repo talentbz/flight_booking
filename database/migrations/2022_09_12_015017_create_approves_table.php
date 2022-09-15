@@ -27,7 +27,12 @@ class CreateApprovesTable extends Migration
             $table->string('user_name')->nullable();
             $table->string('user_email')->nullable();
             $table->string('phone')->nullable();
-            $table->string('cost');
+            $table->double('cost');
+            $table->double('outbound_bussiness_cost')->nullable();
+            $table->double('outbound_economy_cost')->nullable();
+            $table->double('inbound_bussiness_cost')->nullable();
+            $table->double('inbound_economy_cost')->nullable();
+            $table->integer('baggage_count')->nullable();
             $table->integer('payment_type');
             $table->string('payment_status');
             $table->string('created_by');
