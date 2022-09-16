@@ -97,7 +97,7 @@
         <img src="{{public_path().'/images/admin/logo.png'}}" alt="" width="50">
       </div>
       <div class="info"> 
-        <h2>SBISTechs Inc</h2>
+        <h2>NUMERO UN CONSULTANCY</h2>
       </div><!--End Info-->
     </center><!--End InvoiceTop-->
     
@@ -105,9 +105,9 @@
       <div class="info">
         <h2>Contact Info</h2>
         <p> 
-            Address : street city, state 0000</br>
+            Address : </br>
             Email   : sales@numerounconsultancy.com</br>
-            Phone   : 555-555-5555</br>
+            Phone   : </br>
             Agent No   : {{$user_id}}</br>
             Agent Name   : {{$user_name}}</br>
         </p>

@@ -9,7 +9,8 @@ use App\Models\Approve;
 use App\Models\Baggage;
 use Illuminate\Support\Facades\File; 
 use Auth;
-use Mail, PDF;
+use Mail;
+use PDF;
 
 class ApproveController extends Controller
 {
@@ -56,7 +57,7 @@ class ApproveController extends Controller
                          ->select('approves.*', 'users.name')
                          ->first();
         $file = $this->pdfCreate($request->id);
-        
+        dd($file);
         Mail::send('mail', array(
             'cost' => $aprove->cost,
             'agent_name' => $aprove->name,
