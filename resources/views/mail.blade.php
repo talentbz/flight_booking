@@ -1,377 +1,177 @@
-
-<html>
-    <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0;">
-        <meta name="format-detection" content="telephone=no"/>
-    </head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="{{ URL::asset('/assets/admin/pages/approve/pdf.css') }}"> -->
     <style>
-        table {
-            width: 80%;
-            margin: 50px auto;
-            caption-side: bottom;
+        #invoice-POS {
+            box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
+            padding: 2mm;
+            margin: 0 auto;
+            width: 500px;
+            background: #fff;
+        }
+        #invoice-POS ::selection {
+            background: #f31544;
+            color: #fff;
+        }
+        #invoice-POS ::moz-selection {
+            background: #f31544;
+            color: #fff;
+        }
+        #invoice-POS h1 {
+            font-size: 1.5em;
+            color: #222;
+        }
+        #invoice-POS h2 {
+            font-size: 0.9em;
+        }
+        #invoice-POS h3 {
+            font-size: 1.2em;
+            font-weight: 300;
+            line-height: 2em;
+        }
+        #invoice-POS p {
+            font-size: 0.7em;
+            color: #666;
+            line-height: 1.2em;
+        }
+        #invoice-POS #top, #invoice-POS #mid, #invoice-POS #bot {
+        /* Targets all id with 'col-' */
+            border-bottom: 1px solid #eee;
+        }
+        #invoice-POS #top {
+            min-height: 100px;
+        }
+        #invoice-POS #mid {
+            min-height: 80px;
+        }
+        #invoice-POS #bot {
+            min-height: 50px;
+        }
+        #invoice-POS #top .logo {
+            
+        }
+        #invoice-POS .info {
+            display: block;
+            margin-left: 0;
+        }
+        #invoice-POS .title {
+            float: right;
+        }
+        #invoice-POS .title p {
+            text-align: right;
+        }
+        #invoice-POS table {
+            width: 100%;
             border-collapse: collapse;
         }
-        .table-bordered, .table-bordered td, .table-bordered th {
-            border: 1px solid #eff2f7;
+        #invoice-POS .tabletitle {
+            font-size: 0.5em;
+            background: #eee;
         }
-        tbody, td, tfoot, th, thead, tr {
-            border: 0 solid;
-            border-color: inherit;
+        #invoice-POS .service {
+            border-bottom: 1px solid #eee;
         }
-        .table .table-light {
-            color: #495057;
-            border-color: #eff2f7;
-            background-color: #f8f9fa;
+        #invoice-POS .item {
+            width: 24mm;
         }
-        .table-bordered, .table-bordered td, .table-bordered th {
-            border: 1px solid #eff2f7;
+        #invoice-POS .itemtext {
+            font-size: 0.5em;
         }
-           /* -------------------------------------
-          GLOBAL RESETS
-      ------------------------------------- */
-      
-      /*All the styling goes here*/
-      
-      img {
-        border: none;
-        -ms-interpolation-mode: bicubic;
-        max-width: 100%; 
-      }
-
-      body {
-        background-color: #f6f6f6;
-        font-family: sans-serif;
-        -webkit-font-smoothing: antialiased;
-        font-size: 14px;
-        line-height: 1.4;
-        margin: 0;
-        padding: 0;
-        -ms-text-size-adjust: 100%;
-        -webkit-text-size-adjust: 100%; 
-      }
-
-      table {
-        border-collapse: separate;
-        mso-table-lspace: 0pt;
-        mso-table-rspace: 0pt;
-        width: 100%; }
-        table td {
-          font-family: sans-serif;
-          font-size: 14px;
-          vertical-align: top; 
-      }
-
-      /* -------------------------------------
-          BODY & CONTAINER
-      ------------------------------------- */
-
-      .body {
-        background-color: #f6f6f6;
-        width: 100%; 
-      }
-
-      /* Set a max-width, and make it display as block so it will automatically stretch to that width, but will also shrink down on a phone or something */
-      .container {
-        display: block;
-        margin: 0 auto !important;
-        /* makes it centered */
-        max-width: 580px;
-        padding: 10px;
-        width: 580px; 
-      }
-
-      /* This should also be a block element, so that it will fill 100% of the .container */
-      .content {
-        box-sizing: border-box;
-        display: block;
-        margin: 0 auto;
-        max-width: 580px;
-        padding: 10px; 
-      }
-
-      /* -------------------------------------
-          HEADER, FOOTER, MAIN
-      ------------------------------------- */
-      .main {
-        background: #ffffff;
-        border-radius: 3px;
-        width: 100%; 
-      }
-
-      .wrapper {
-        box-sizing: border-box;
-        padding: 20px; 
-      }
-
-      .content-block {
-        padding-bottom: 10px;
-        padding-top: 10px;
-      }
-
-      .footer {
-        clear: both;
-        margin-top: 10px;
-        text-align: center;
-        width: 100%; 
-      }
-        .footer td,
-        .footer p,
-        .footer span,
-        .footer a {
-          color: #999999;
-          font-size: 12px;
-          text-align: center; 
-      }
-
-      /* -------------------------------------
-          TYPOGRAPHY
-      ------------------------------------- */
-      h1,
-      h2,
-      h3,
-      h4 {
-        color: #000000;
-        font-family: sans-serif;
-        font-weight: 400;
-        line-height: 1.4;
-        margin: 0;
-        margin-bottom: 30px; 
-      }
-
-      h1 {
-        font-size: 35px;
-        font-weight: 300;
-        text-align: center;
-        text-transform: capitalize; 
-      }
-
-      p,
-      ul,
-      ol {
-        font-family: sans-serif;
-        font-size: 14px;
-        font-weight: normal;
-        margin: 0;
-        margin-bottom: 15px; 
-      }
-        p li,
-        ul li,
-        ol li {
-          list-style-position: inside;
-          margin-left: 5px; 
-      }
-
-      a {
-        color: #3498db;
-        text-decoration: underline; 
-      }
-
-      /* -------------------------------------
-          BUTTONS
-      ------------------------------------- */
-      .btn {
-        box-sizing: border-box;
-        width: 100%; }
-        .btn > tbody > tr > td {
-          padding-bottom: 15px; }
-        .btn table {
-          width: auto; 
-      }
-        .btn table td {
-          background-color: #ffffff;
-          border-radius: 5px;
-          text-align: center; 
-      }
-        .btn a {
-          background-color: #ffffff;
-          border: solid 1px #3498db;
-          border-radius: 5px;
-          box-sizing: border-box;
-          color: #3498db;
-          cursor: pointer;
-          display: inline-block;
-          font-size: 14px;
-          font-weight: bold;
-          margin: 0;
-          padding: 12px 25px;
-          text-decoration: none;
-          text-transform: capitalize; 
-      }
-
-      .btn-primary table td {
-        background-color: #3498db; 
-      }
-
-      .btn-primary a {
-        background-color: #3498db;
-        border-color: #3498db;
-        color: #ffffff; 
-      }
-
-      /* -------------------------------------
-          OTHER STYLES THAT MIGHT BE USEFUL
-      ------------------------------------- */
-      .last {
-        margin-bottom: 0; 
-      }
-
-      .first {
-        margin-top: 0; 
-      }
-
-      .align-center {
-        text-align: center; 
-      }
-
-      .align-right {
-        text-align: right; 
-      }
-
-      .align-left {
-        text-align: left; 
-      }
-
-      .clear {
-        clear: both; 
-      }
-
-      .mt0 {
-        margin-top: 0; 
-      }
-
-      .mb0 {
-        margin-bottom: 0; 
-      }
-
-      .preheader {
-        color: transparent;
-        display: none;
-        height: 0;
-        max-height: 0;
-        max-width: 0;
-        opacity: 0;
-        overflow: hidden;
-        mso-hide: all;
-        visibility: hidden;
-        width: 0; 
-      }
-
-      .powered-by a {
-        text-decoration: none; 
-      }
-
-      hr {
-        border: 0;
-        border-bottom: 1px solid #f6f6f6;
-        margin: 20px 0; 
-      }
-
-      /* -------------------------------------
-          RESPONSIVE AND MOBILE FRIENDLY STYLES
-      ------------------------------------- */
-      @media only screen and (max-width: 620px) {
-        table.body h1 {
-          font-size: 28px !important;
-          margin-bottom: 10px !important; 
+        #invoice-POS #legalcopy {
+            margin-top: 5mm;
         }
-        table.body p,
-        table.body ul,
-        table.body ol,
-        table.body td,
-        table.body span,
-        table.body a {
-          font-size: 16px !important; 
-        }
-        table.body .wrapper,
-        table.body .article {
-          padding: 10px !important; 
-        }
-        table.body .content {
-          padding: 0 !important; 
-        }
-        table.body .container {
-          padding: 0 !important;
-          width: 100% !important; 
-        }
-        table.body .main {
-          border-left-width: 0 !important;
-          border-radius: 0 !important;
-          border-right-width: 0 !important; 
-        }
-        table.body .btn table {
-          width: 100% !important; 
-        }
-        table.body .btn a {
-          width: 100% !important; 
-        }
-        table.body .img-responsive {
-          height: auto !important;
-          max-width: 100% !important;
-          width: auto !important; 
-        }
-      }
-
-      /* -------------------------------------
-          PRESERVE THESE STYLES IN THE HEAD
-      ------------------------------------- */
-      @media all {
-        .ExternalClass {
-          width: 100%; 
-        }
-        .ExternalClass,
-        .ExternalClass p,
-        .ExternalClass span,
-        .ExternalClass font,
-        .ExternalClass td,
-        .ExternalClass div {
-          line-height: 100%; 
-        }
-        .apple-link a {
-          color: inherit !important;
-          font-family: inherit !important;
-          font-size: inherit !important;
-          font-weight: inherit !important;
-          line-height: inherit !important;
-          text-decoration: none !important; 
-        }
-        #MessageViewBody a {
-          color: inherit;
-          text-decoration: none;
-          font-size: inherit;
-          font-family: inherit;
-          font-weight: inherit;
-          line-height: inherit;
-        }
-        .btn-primary table td:hover {
-          background-color: #34495e !important; 
-        }
-        .btn-primary a:hover {
-          background-color: #34495e !important;
-          border-color: #34495e !important; 
-        } 
-      }
 
     </style>
-    <body>
-        <table class="table table-bordered">
-            <thead></thead>
-            <tr>
-                <td>
-                    <p>Thank you and Best Regards.</p><br>
-                    <!-- <p>Amount : {{$cost}}</p>
-                    <p>Agent No : {{$agent_no}}</p>
-                    <p>Agent Name : {{$agent_name}}</p>
-                    <p>OutBound Seat : @foreach($outbound_seat as $row){{$row}}, @endforeach</p>
-                    <p>InBound Seat : @foreach($inbound_seat as $row){{$row}}, @endforeach</p> -->
-                </td>
-            </tr>
-        </table>
-    </body>
+    <title>Document</title>
+</head>
+<body>
+    
+  <div id="invoice-POS">
+    
+    <center id="top">
+      <div class="logo">
+        <img src="{{public_path().'/images/admin/logo.png'}}" alt="" width="50">
+      </div>
+      <div class="info"> 
+        <h2>NUMERO UN CONSULTANCY</h2>
+      </div><!--End Info-->
+    </center><!--End InvoiceTop-->
+    
+    <div id="mid">
+      <div class="info">
+        <h2>Contact Info</h2>
+        <p> 
+            Address : </br>
+            Email   : sales@numerounconsultancy.com</br>
+            Phone   : </br>
+            Agent No   : {{$user_id}}</br>
+            Agent Name   : {{$user_name}}</br>
+        </p>
+      </div>
+    </div><!--End Invoice Mid-->
+    
+    <div id="bot">
+        <div id="table">
+            <table>
+                <tr class="tabletitle">
+                    <td class="item"><h2>Item</h2></td>
+                    <td class="Hours"><h2>Qty</h2></td>
+                    <td class="Rate"><h2>Sub Total</h2></td>
+                    <td class="Rate"><h2>Description</h2></td>
+                </tr>
+
+                <tr class="service">
+                    <td class="tableitem"><p class="itemtext">Bussiness Seat</p></td>
+                    <td class="tableitem"><p class="itemtext">{{$bussiness_seat_count}}</p></td>
+                    <td class="tableitem"><p class="itemtext">${{$bussiness_seat_price}}</p></td>
+                    <td class="tableitem">
+                        @if(count($bussiness_seat) > 0)
+                        <p class="itemtext">
+                            @foreach($bussiness_seat as $row)
+                                {{$row}}, 
+                            @endforeach
+                        </p>
+                        @endif
+                    </td>
+                </tr>
+
+                <tr class="service">
+                    <td class="tableitem"><p class="itemtext">Economy Seat</p></td>
+                    <td class="tableitem"><p class="itemtext">{{$economy_seat_count}}</p></td>
+                    <td class="tableitem"><p class="itemtext">${{$economy_seat_price}}</p></td>
+                    <td class="tableitem">
+                        @if(count($economy_seat) > 0)
+                        <p class="itemtext">
+                            @foreach($economy_seat as $row)
+                                {{$row}}, 
+                            @endforeach
+                        </p>
+                        @endif
+                    </td>
+                </tr>
+
+                <tr class="service">
+                    <td class="tableitem"><p class="itemtext">Extra Baggage</p></td>
+                    <td class="tableitem"><p class="itemtext">{{$extra_bag}}</p></td>
+                    <td class="tableitem"><p class="itemtext">${{$baggage_price}}</p></td>
+                    <td class="tableitem"></td>
+                </tr>
+
+                <tr class="tabletitle">
+                    <td class="Rate"><h2>Total</h2></td>
+                    <td></td>
+                    <td class="payment"><h2>${{$total_cost}}</h2></td>
+                    <td></td>
+                </tr>
+
+            </table>
+        </div><!--End Table-->
+
+    </div><!--End InvoiceBot-->
+</div><!--End Invoice-->
+</body>
 </html>
-
-
-<!-- include status and reply email-->
-
-
-

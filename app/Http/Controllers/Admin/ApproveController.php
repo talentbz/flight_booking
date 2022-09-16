@@ -52,24 +52,24 @@ class ApproveController extends Controller
 
     public function status(Request $request)
     {
-        $aprove = Approve::leftJoin('users', 'approves.created_by', 'users.id')
-                         ->where('approves.id', $request->id)
-                         ->select('approves.*', 'users.name')
-                         ->first();
-        $file = $this->pdfCreate($request->id);
-        dd($file);
-        Mail::send('mail', array(
-            'cost' => $aprove->cost,
-            'agent_name' => $aprove->name,
-            'agent_no' => $aprove->created_by,
-            'outbound_seat' => json_decode($aprove->start_seat),
-            'inbound_seat' => json_decode($aprove->return_seat),
-        ), function($message) use ($aprove, $file){
-            $message->from(env("MAIL_USERNAME"));
-            $message->to($aprove->user_email, 'Booking Invoice')
-                    ->subject('Booking Invoice');
-            $message->attach($file);
-        }); 
+        // $aprove = Approve::leftJoin('users', 'approves.created_by', 'users.id')
+        //                  ->where('approves.id', $request->id)
+        //                  ->select('approves.*', 'users.name')
+        //                  ->first();
+        $this->pdfCreate($request->id);
+        // dd($file);
+        // Mail::send('mail', array(
+        //     'cost' => $aprove->cost,
+        //     'agent_name' => $aprove->name,
+        //     'agent_no' => $aprove->created_by,
+        //     'outbound_seat' => json_decode($aprove->start_seat),
+        //     'inbound_seat' => json_decode($aprove->return_seat),
+        // ), function($message) use ($aprove, $file){
+        //     $message->from(env("MAIL_USERNAME"));
+        //     $message->to($aprove->user_email, 'Booking Invoice')
+        //             ->subject('Booking Invoice');
+        //     $message->attach($file);
+        // }); 
 
         $approve = Approve::where('id', $request->id)
                                 ->update([
@@ -89,7 +89,7 @@ class ApproveController extends Controller
     function pdfCreate($id)
     {
         $aprove = Approve::leftJoin('users', 'approves.created_by', 'users.id')
-                         ->where('approves.id', 1)
+                         ->where('approves.id', $id)
                          ->select('approves.*', 'users.name')
                          ->first();
         $outbound_bussiness_price = $aprove->outbound_bussiness_cost;
@@ -137,7 +137,27 @@ class ApproveController extends Controller
         $baggage_price = $baggage->price * $aprove->baggage_count; 
 
         
-        $pdf = PDF::loadView('admin.pages.approve.invoice', [
+        // $pdf = PDF::loadView('admin.pages.approve.invoice', [
+        //     'bussiness_seat' => $bussiness_seat,
+        //     'economy_seat' => $economy_seat,
+        //     'bussiness_seat_count' => $bussiness_seat_count,
+        //     'economy_seat_count' => $economy_seat_count,
+        //     'bussiness_seat_price' => $bussiness_seat_price,
+        //     'economy_seat_price' => $economy_seat_price,
+        //     'extra_bag' => $aprove->baggage_count,
+        //     'baggage_price' => $baggage_price,
+        //     'total_cost' => $total_cost,
+        //     'user_name' => $aprove->name,
+        //     'user_id' => $aprove->created_by,
+        // ]);
+        // $path = public_path('uploads/pdf/');
+        // if(!file_exists($path)){
+        //     File::makeDirectory($path, $mode = 0755, true, true);
+        // }
+        // $fileName = time().'.pdf';
+        // $file = $path . '/' . $fileName;
+        // $pdf->save($file);
+        Mail::send('mail', array(
             'bussiness_seat' => $bussiness_seat,
             'economy_seat' => $economy_seat,
             'bussiness_seat_count' => $bussiness_seat_count,
@@ -149,14 +169,12 @@ class ApproveController extends Controller
             'total_cost' => $total_cost,
             'user_name' => $aprove->name,
             'user_id' => $aprove->created_by,
-        ]);
-        $path = public_path('uploads/pdf/');
-        if(!file_exists($path)){
-            File::makeDirectory($path, $mode = 0755, true, true);
-        }
-        $fileName = time().'.pdf';
-        $file = $path . '/' . $fileName;
-        $pdf->save($file);
+        ), function($message) use ($aprove, $file){
+            $message->from(env("MAIL_USERNAME"));
+            $message->to($aprove->user_email, 'Booking Invoice')
+                    ->subject('Booking Invoice');
+            $message->attach($file);
+        }); 
         return $file;
     }
 
