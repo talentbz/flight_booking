@@ -128,20 +128,36 @@
                     <td class="tableitem"><p class="itemtext">Bussiness Seat</p></td>
                     <td class="tableitem"><p class="itemtext">{{$bussiness_seat_count}}</p></td>
                     <td class="tableitem"><p class="itemtext">${{$bussiness_seat_price}}</p></td>
-                    <td class="tableitem"><p class="itemtext">6G, 7G</p></td>
+                    <td class="tableitem">
+                        @if(count($bussiness_seat) > 0)
+                        <p class="itemtext">
+                            @foreach($bussiness_seat as $row)
+                                {{$row}}, 
+                            @endforeach
+                        </p>
+                        @endif
+                    </td>
                 </tr>
 
                 <tr class="service">
                     <td class="tableitem"><p class="itemtext">Economy Seat</p></td>
                     <td class="tableitem"><p class="itemtext">{{$economy_seat_count}}</p></td>
                     <td class="tableitem"><p class="itemtext">${{$economy_seat_price}}</p></td>
-                    <td class="tableitem"><p class="itemtext">6G, 7G</p></td>
+                    <td class="tableitem">
+                        @if(count($economy_seat) > 0)
+                        <p class="itemtext">
+                            @foreach($economy_seat as $row)
+                                {{$row}}, 
+                            @endforeach
+                        </p>
+                        @endif
+                    </td>
                 </tr>
 
                 <tr class="service">
                     <td class="tableitem"><p class="itemtext">Extra Baggage</p></td>
                     <td class="tableitem"><p class="itemtext">{{$extra_bag}}</p></td>
-                    <td class="tableitem"><p class="itemtext">5</p></td>
+                    <td class="tableitem"><p class="itemtext">${{$baggage_price}}</p></td>
                     <td class="tableitem"></td>
                 </tr>
 

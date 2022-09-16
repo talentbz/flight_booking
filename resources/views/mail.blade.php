@@ -359,11 +359,11 @@
             <tr>
                 <td>
                     <p>Thank you and Best Regards.</p><br>
-                    <p>Amount : {{$cost}}</p>
+                    <!-- <p>Amount : {{$cost}}</p>
                     <p>Agent No : {{$agent_no}}</p>
                     <p>Agent Name : {{$agent_name}}</p>
                     <p>OutBound Seat : @foreach($outbound_seat as $row){{$row}}, @endforeach</p>
-                    <p>InBound Seat : @foreach($inbound_seat as $row){{$row}}, @endforeach</p>
+                    <p>InBound Seat : @foreach($inbound_seat as $row){{$row}}, @endforeach</p> -->
                 </td>
             </tr>
         </table>

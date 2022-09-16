@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Schedule;
 use App\Models\Approve;
+use App\Models\Baggage;
 use Illuminate\Support\Facades\File; 
 use Auth;
 use Mail, PDF;
@@ -54,16 +55,19 @@ class ApproveController extends Controller
                          ->where('approves.id', $request->id)
                          ->select('approves.*', 'users.name')
                          ->first();
+        $file = $this->pdfCreate($request->id);
+        
         Mail::send('mail', array(
             'cost' => $aprove->cost,
             'agent_name' => $aprove->name,
             'agent_no' => $aprove->created_by,
             'outbound_seat' => json_decode($aprove->start_seat),
             'inbound_seat' => json_decode($aprove->return_seat),
-        ), function($message) use ($aprove){
+        ), function($message) use ($aprove, $file){
             $message->from(env("MAIL_USERNAME"));
             $message->to($aprove->user_email, 'Booking Invoice')
                     ->subject('Booking Invoice');
+            $message->attach($file);
         }); 
 
         $approve = Approve::where('id', $request->id)
@@ -81,7 +85,7 @@ class ApproveController extends Controller
         return response()->json(['count' => $approve_count]);
     }
     
-    public function pdfCreate(Request $request)
+    function pdfCreate($id)
     {
         $aprove = Approve::leftJoin('users', 'approves.created_by', 'users.id')
                          ->where('approves.id', 1)
@@ -97,12 +101,16 @@ class ApproveController extends Controller
         $outbound_economy_seat = [];
         $inbound_bussiness_seat = [];
         $inbound_economy_seat = [];
+        $bussiness_seat = [];
+        $economy_seat = [];
         $outbound_seat = json_decode($aprove->start_seat);
         foreach($outbound_seat as $row){
             $get_first_number = intval(substr($row, 0, -1));
             if($get_first_number > 0 && $get_first_number < 10){
+                array_push($bussiness_seat, $row);
                 array_push($outbound_bussiness_seat, $row);
             } else {
+                array_push($economy_seat, $row);
                 array_push($outbound_economy_seat, $row);
             }
         }
@@ -112,21 +120,31 @@ class ApproveController extends Controller
             $get_first_number = intval(substr($row, 0, -1));
             if($get_first_number > 0 && $get_first_number < 10){
                 array_push($inbound_bussiness_seat, $row);
+                array_push($bussiness_seat, $row);
             } else {
                 array_push($inbound_economy_seat, $row);
+                array_push($economy_seat, $row);
             }
         }
+        
         $bussiness_seat_count = count($outbound_bussiness_seat) + count($inbound_bussiness_seat);
         $economy_seat_count = count($outbound_economy_seat) + count($inbound_economy_seat);
         $bussiness_seat_price = count($outbound_bussiness_seat) * $outbound_bussiness_price + count($inbound_bussiness_seat) * $inbound_bussiness_price;
         $economy_seat_price = count($outbound_economy_seat) * $outbound_economy_price + count($inbound_economy_seat) * $inbound_economy_price;
         
+        $baggage = Baggage::first();
+        $baggage_price = $baggage->price * $aprove->baggage_count; 
+
+        
         $pdf = PDF::loadView('admin.pages.approve.invoice', [
+            'bussiness_seat' => $bussiness_seat,
+            'economy_seat' => $economy_seat,
             'bussiness_seat_count' => $bussiness_seat_count,
             'economy_seat_count' => $economy_seat_count,
             'bussiness_seat_price' => $bussiness_seat_price,
             'economy_seat_price' => $economy_seat_price,
             'extra_bag' => $aprove->baggage_count,
+            'baggage_price' => $baggage_price,
             'total_cost' => $total_cost,
             'user_name' => $aprove->name,
             'user_id' => $aprove->created_by,
@@ -136,8 +154,9 @@ class ApproveController extends Controller
             File::makeDirectory($path, $mode = 0755, true, true);
         }
         $fileName = time().'.pdf';
-        $pdf->save($path . '/' . $fileName);
-
+        $file = $path . '/' . $fileName;
+        $pdf->save($file);
+        return $file;
     }
 
     public function pdfView(Request $request)
