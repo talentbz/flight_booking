@@ -9,6 +9,7 @@ use App\Models\SeatType;
 use App\Models\PriceByDate;
 use App\Models\PriceByCount;
 use App\Models\Booking;
+use App\Models\Approve;
 use App\Models\AirLine;
 use App\Models\User;
 use App\Models\Baggage;
@@ -55,6 +56,41 @@ class BookingController extends Controller
     }
     public function store(Request $request)
     {
+        //validation whether existing seat no
+        $approve = Approve::where('schedule_id', $request->booking_schedule)->get();
+        $outbound_seat =[];
+        $inbound_seat =[];
+        foreach($approve as $row){
+            foreach(json_decode($row->return_seat) as $return_seat){
+                $inbound_seat[] = $return_seat;
+            } 
+            foreach(json_decode($row->start_seat) as $start_seat){
+                $outbound_seat[] = $start_seat;
+            }
+        }
+        $booking = Booking::where('schedule_id', $request->booking_schedule)->get();
+        foreach($booking as $row){
+            foreach(json_decode($row->return_seat) as $return_seat){
+                $inbound_seat[] = $return_seat;
+            } 
+            foreach(json_decode($row->start_seat) as $start_seat){
+                $outbound_seat[] = $start_seat;
+            }
+        }
+        $request_outbound_seat = explode( ",", $request->out_bound );
+        $request_inbound_seat = explode( ",", $request->in_bound );
+        foreach($request_outbound_seat as $row){
+            if(in_array($row, $outbound_seat) == true){
+                return response()->json(['result' => 'exist']);
+            }
+        }
+
+        foreach($request_inbound_seat as $row){
+            if(in_array($row, $inbound_seat) == true){
+                return response()->json(['result' => 'exist']);
+            }
+        }
+
         $schedule = Schedule::findOrFail($request->booking_schedule);
         $booking = new Booking;
         $booking->booking_no = $request->booking_no;
@@ -95,7 +131,6 @@ class BookingController extends Controller
         $current_date = Carbon::parse(Carbon::now()->format('Y-m-d'));
         $schedule = Schedule::findOrFail($request->shedule_id);
         $price_by_date = PriceByDate::where('status', 1)->get();
-        $price_by_count = PriceByCount::get();
         $seat_type = SeatType::get();
         $bussiness_seat = [];
         $economy_seat = [];
@@ -105,7 +140,8 @@ class BookingController extends Controller
         $total_seat_number = [];
         $trip_type = $request->trip_type;
         if($trip_type == "outBound"){
-            $get_seat = Booking::where('start_date', $schedule->departure_date)->get();
+            $get_booking_seat = Booking::where('start_date', $schedule->departure_date)->get();
+            $get_aprove_seat = Approve::where('start_date', $schedule->departure_date)->get();
             $departure_date = Carbon::parse($schedule->departure_date);
             $departure_diff=$current_date->diffInDays($departure_date);
 
@@ -118,7 +154,21 @@ class BookingController extends Controller
             }
 
             // get exsiting seat
-            foreach($get_seat as $row){
+            foreach($get_booking_seat as $row){
+                $seats = json_decode($row->start_seat);
+                foreach($seats as $seat){
+                    //scrape first string for trip type
+                    $get_first_number = intval(substr($seat, 0, -1));
+                    array_push($total_seat_number, $get_first_number);
+                    if($get_first_number > 0 && $get_first_number < 10){
+                        array_push($bussiness_seat, $seat);
+                    } else {
+                        array_push($economy_seat, $seat);
+                    }
+                }
+            }
+
+            foreach($get_aprove_seat as $row){
                 $seats = json_decode($row->start_seat);
                 foreach($seats as $seat){
                     //scrape first string for trip type
@@ -134,34 +184,25 @@ class BookingController extends Controller
 
             //get percetage by bussiness seat count
             $bussiness_seat_count = count($bussiness_seat);
-            // $test = PriceByCount::where('min_count', '>=', 0)
-            //                     ->where('max_count', '<=', 0)  
-            //                     ->where('status', 1)
-            //                     ->where('seat_type_id', 1)
-            //                     ->get();
-            //      dd($test);       
-            if($bussiness_seat_count > 10 && $bussiness_seat_count <= 20){
-                $bussiness_seat_percent = $price_by_count[1]->percentage;
-            } else if($bussiness_seat_count > 20 && $bussiness_seat_count <= 30){
-                $bussiness_seat_percent = $price_by_count[2]->percentage;
-            } else {
-                $bussiness_seat_percent = $price_by_count[0]->percentage;
-            }
-
-             //get percetage by economy seat count
-             $economy_seat_percent = count($economy_seat);
-             if($economy_seat_percent > 40 && $economy_seat_percent <= 90){
-                 $economy_seat_percent = $price_by_count[4]->percentage;
-             } else if($economy_seat_percent > 90 && $economy_seat_percent <= 140){
-                 $economy_seat_percent = $price_by_count[5]->percentage;
-             } else if($economy_seat_percent > 141 && $economy_seat_percent <= 190){
-                 $economy_seat_percent = $price_by_count[6]->percentage;
-             } else {
-                $economy_seat_percent = $price_by_count[3]->percentage;
-             }
+            $economy_seat_count = count($economy_seat);
+            $bussiness_by_count = PriceByCount::where('min_count', '<=', $bussiness_seat_count)
+                                                ->where('max_count', '>=', $bussiness_seat_count)  
+                                                ->where('status', 1)
+                                                ->where('seat_type_id', 1)
+                                                ->where('status', 1)
+                                                ->first();
+            $economy_by_count = PriceByCount::where('min_count', '<=', $economy_seat_count)
+                                                ->where('max_count', '>=', $economy_seat_count)  
+                                                ->where('status', 1)
+                                                ->where('seat_type_id', 2)
+                                                ->where('status', 1)
+                                                ->first();
+            $bussiness_seat_percent = $bussiness_by_count->percentage;
+            $economy_seat_percent = $economy_by_count->percentage;
 
         } else {
-            $get_seat = Booking::where('return_date', $schedule->return_date)->get();
+            $get_booking_seat = Booking::where('return_date', $schedule->return_date)->get();
+            $get_aprove_seat = Approve::where('return_date', $schedule->return_date)->get();
             $return_date = Carbon::parse($schedule->return_date);
             $return_diff=$current_date->diffInDays($return_date);
             foreach($price_by_date as $row){
@@ -170,7 +211,7 @@ class BookingController extends Controller
                     break;
                 }
             }
-            foreach($get_seat as $row){
+            foreach($get_booking_seat as $row){
                 $seats = json_decode($row->return_seat);
                 foreach($seats as $seat){
                     //scrape first string for trip type
@@ -183,28 +224,36 @@ class BookingController extends Controller
                     }
                 }
             }
-
+            foreach($get_aprove_seat as $row){
+                $seats = json_decode($row->return_seat);
+                foreach($seats as $seat){
+                    //scrape first string for trip type
+                    $get_first_number = intval(substr($seat, 0, -1));
+                    array_push($total_seat_number, $get_first_number);
+                    if($get_first_number > 0 && $get_first_number < 10){
+                        array_push($bussiness_seat, $seat);
+                    } else {
+                        array_push($economy_seat, $seat);
+                    }
+                }
+            }
             //get percetage by bussiness seat count
             $bussiness_seat_count = count($bussiness_seat);
-            if($bussiness_seat_count > 10 && $bussiness_seat_count <= 20){
-                $bussiness_seat_percent = $price_by_count[1]->percentage;
-            } else if($bussiness_seat_count > 20 && $bussiness_seat_count <= 30){
-                $bussiness_seat_percent = $price_by_count[2]->percentage;
-            } else {
-                $bussiness_seat_percent = $price_by_count[0]->percentage;
-            }
-
-             //get percetage by economy seat count
-             $economy_seat_percent = count($economy_seat);
-             if($economy_seat_percent > 40 && $economy_seat_percent <= 90){
-                 $economy_seat_percent = $price_by_count[4]->percentage;
-             } else if($economy_seat_percent > 90 && $economy_seat_percent <= 140){
-                 $economy_seat_percent = $price_by_count[5]->percentage;
-             } else if($economy_seat_percent > 141 && $economy_seat_percent <= 190){
-                 $economy_seat_percent = $price_by_count[6]->percentage;
-             } else {
-                $economy_seat_percent = $price_by_count[3]->percentage;
-             }
+            $economy_seat_count = count($economy_seat);
+            $bussiness_by_count = PriceByCount::where('min_count', '<=', $bussiness_seat_count)
+                                                ->where('max_count', '>=', $bussiness_seat_count)  
+                                                ->where('status', 1)
+                                                ->where('seat_type_id', 1)
+                                                ->where('status', 1)
+                                                ->first();
+            $economy_by_count = PriceByCount::where('min_count', '<=', $economy_seat_count)
+                                                ->where('max_count', '>=', $economy_seat_count)  
+                                                ->where('status', 1)
+                                                ->where('seat_type_id', 2)
+                                                ->where('status', 1)
+                                                ->first();
+            $bussiness_seat_percent = $bussiness_by_count->percentage;
+            $economy_seat_percent = $economy_by_count->percentage;
              
         }
         $bussiness_price = (int)$seat_type[0]->price + (int)$seat_type[0]->price*(int)$percentage/100 + (int)$seat_type[0]->price*(int)$bussiness_seat_percent/100;

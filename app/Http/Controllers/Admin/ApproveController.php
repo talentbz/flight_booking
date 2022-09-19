@@ -7,15 +7,17 @@ use Illuminate\Http\Request;
 use App\Models\Schedule;
 use App\Models\Approve;
 use App\Models\Baggage;
+use App\Models\Booking;
 use Illuminate\Support\Facades\File; 
 use Auth;
 use Mail;
-use PDF;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class ApproveController extends Controller
 {
     public function index(Request $request)
     {
+        // dd(array_merge($a1,$a2));
         $approve = Approve::leftJoin('users', 'users.id', 'approves.created_by')
                               ->leftJoin('air_lines', 'air_lines.id', 'approves.air_line')
                               ->select('approves.*', 'users.name', 'air_lines.name as air_line_name')->get(); 
@@ -25,6 +27,41 @@ class ApproveController extends Controller
     }
     public function store(Request $request)
     {
+        //validation whether existing seat no
+        $approve = Approve::where('schedule_id', $request->booking_schedule)->get();
+        $outbound_seat =[];
+        $inbound_seat =[];
+        foreach($approve as $row){
+            foreach(json_decode($row->return_seat) as $return_seat){
+                $inbound_seat[] = $return_seat;
+            } 
+            foreach(json_decode($row->start_seat) as $start_seat){
+                $outbound_seat[] = $start_seat;
+            }
+        }
+        $booking = Booking::where('schedule_id', $request->booking_schedule)->get();
+        foreach($booking as $row){
+            foreach(json_decode($row->return_seat) as $return_seat){
+                $inbound_seat[] = $return_seat;
+            } 
+            foreach(json_decode($row->start_seat) as $start_seat){
+                $outbound_seat[] = $start_seat;
+            }
+        }
+        $request_outbound_seat = explode( ",", $request->out_bound );
+        $request_inbound_seat = explode( ",", $request->in_bound );
+        foreach($request_outbound_seat as $row){
+            if(in_array($row, $outbound_seat) == true){
+                return response()->json(['result' => 'exist']);
+            }
+        }
+
+        foreach($request_inbound_seat as $row){
+            if(in_array($row, $inbound_seat) == true){
+                return response()->json(['result' => 'exist']);
+            }
+        }
+
         $schedule = Schedule::findOrFail($request->booking_schedule);
         $approve = new Approve;
         $approve->air_line = $request->air_line;
@@ -56,7 +93,7 @@ class ApproveController extends Controller
                          ->where('approves.id', $request->id)
                          ->select('approves.*', 'users.name')
                          ->first();
-        $this->pdfCreate($request->id);
+        $file = $this->pdfCreate($request->id);
         Mail::send('mail', array(
             'cost' => $aprove->cost,
             'agent_name' => $aprove->name,
@@ -135,7 +172,6 @@ class ApproveController extends Controller
         $baggage = Baggage::first();
         $baggage_price = $baggage->price * $aprove->baggage_count; 
 
-        
         $pdf = PDF::loadView('admin.pages.approve.invoice', [
             'bussiness_seat' => $bussiness_seat,
             'economy_seat' => $economy_seat,

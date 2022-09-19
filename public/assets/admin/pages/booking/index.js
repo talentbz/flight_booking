@@ -194,12 +194,15 @@ $(document).ready(function () {
                 method: 'post',
                 data: formData,
                 success: function (res) {
+                    if(res.result == "exist" ){
+                        toastr["error"]("There are exsing seat no. Please refresh seat map!");
+                    }
                     if(res.result == "success" ){
                         toastr["success"]("Success!!!");
+                        setInterval(function(){ 
+                            location.href = list_url; 
+                        }, 2000);
                     }
-                    setInterval(function(){ 
-                        location.href = list_url; 
-                    }, 2000);
                 },
                 error: function (errors){
                     toastr["warning"](errors);
@@ -214,11 +217,15 @@ $(document).ready(function () {
                 method: 'post',
                 data: formData,
                 success: function (res) {
+                    if(res.result == "exist" ){
+                        toastr["error"]("There are exsing seat no. Please refresh seat map!");
+                    }
                     if(res.result == "success" ){
                         toastr["success"]("Success!!!");
                         $('.aprove_button').hide()
                         $('.save_button').show()
                     }
+                    
                 },
                 error: function (errors){
                     toastr["warning"](errors);
@@ -234,6 +241,9 @@ $(document).ready(function () {
                 method: 'post',
                 data: formData,
                 success: function (res) {
+                    if(res.result == "exist" ){
+                        toastr["error"]("There are exsing seat no. Please refresh seat map!");
+                    }
                     if(res.result == "success" ){
                         toastr["success"]("Success!!!");
                         setInterval(function(){ 

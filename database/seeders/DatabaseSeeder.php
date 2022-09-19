@@ -53,7 +53,7 @@ class DatabaseSeeder extends Seeder
             [
                 'seat_count'   => '1 - 10 Seats',
                 'percentage'   => 0,
-                'min_count'    => 1,
+                'min_count'    => 0,
                 'max_count'    => 10,
                 'seat_type_id' => 1,
             ],
@@ -74,7 +74,7 @@ class DatabaseSeeder extends Seeder
             [
                 'seat_count'   => '1 - 40 Seats',
                 'percentage'   => 0,
-                'min_count'    => 1,
+                'min_count'    => 0,
                 'max_count'    => 40,
                 'seat_type_id' => 2,
             ],
