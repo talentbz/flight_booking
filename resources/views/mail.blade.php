@@ -101,77 +101,7 @@
       </div><!--End Info-->
     </center><!--End InvoiceTop-->
     
-    <div id="mid">
-      <div class="info">
-        <h2>Contact Info</h2>
-        <p> 
-            Address : </br>
-            Email   : sales@numerounconsultancy.com</br>
-            Phone   : </br>
-            Agent No   : {{$user_id}}</br>
-            Agent Name   : {{$user_name}}</br>
-        </p>
-      </div>
-    </div><!--End Invoice Mid-->
-    
-    <div id="bot">
-        <div id="table">
-            <table>
-                <tr class="tabletitle">
-                    <td class="item"><h2>Item</h2></td>
-                    <td class="Hours"><h2>Qty</h2></td>
-                    <td class="Rate"><h2>Sub Total</h2></td>
-                    <td class="Rate"><h2>Description</h2></td>
-                </tr>
-
-                <tr class="service">
-                    <td class="tableitem"><p class="itemtext">Bussiness Seat</p></td>
-                    <td class="tableitem"><p class="itemtext">{{$bussiness_seat_count}}</p></td>
-                    <td class="tableitem"><p class="itemtext">${{$bussiness_seat_price}}</p></td>
-                    <td class="tableitem">
-                        @if(count($bussiness_seat) > 0)
-                        <p class="itemtext">
-                            @foreach($bussiness_seat as $row)
-                                {{$row}}, 
-                            @endforeach
-                        </p>
-                        @endif
-                    </td>
-                </tr>
-
-                <tr class="service">
-                    <td class="tableitem"><p class="itemtext">Economy Seat</p></td>
-                    <td class="tableitem"><p class="itemtext">{{$economy_seat_count}}</p></td>
-                    <td class="tableitem"><p class="itemtext">${{$economy_seat_price}}</p></td>
-                    <td class="tableitem">
-                        @if(count($economy_seat) > 0)
-                        <p class="itemtext">
-                            @foreach($economy_seat as $row)
-                                {{$row}}, 
-                            @endforeach
-                        </p>
-                        @endif
-                    </td>
-                </tr>
-
-                <tr class="service">
-                    <td class="tableitem"><p class="itemtext">Extra Baggage</p></td>
-                    <td class="tableitem"><p class="itemtext">{{$extra_bag}}</p></td>
-                    <td class="tableitem"><p class="itemtext">${{$baggage_price}}</p></td>
-                    <td class="tableitem"></td>
-                </tr>
-
-                <tr class="tabletitle">
-                    <td class="Rate"><h2>Total</h2></td>
-                    <td></td>
-                    <td class="payment"><h2>${{$total_cost}}</h2></td>
-                    <td></td>
-                </tr>
-
-            </table>
-        </div><!--End Table-->
-
-    </div><!--End InvoiceBot-->
+   
 </div><!--End Invoice-->
 </body>
 </html>
