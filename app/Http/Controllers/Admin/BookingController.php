@@ -60,14 +60,6 @@ class BookingController extends Controller
         $approve = Approve::where('schedule_id', $request->booking_schedule)->get();
         $outbound_seat =[];
         $inbound_seat =[];
-        foreach($approve as $row){
-            foreach(json_decode($row->return_seat) as $return_seat){
-                $inbound_seat[] = $return_seat;
-            } 
-            foreach(json_decode($row->start_seat) as $start_seat){
-                $outbound_seat[] = $start_seat;
-            }
-        }
         $booking = Booking::where('schedule_id', $request->booking_schedule)->get();
         foreach($booking as $row){
             foreach(json_decode($row->return_seat) as $return_seat){
@@ -75,6 +67,17 @@ class BookingController extends Controller
             } 
             foreach(json_decode($row->start_seat) as $start_seat){
                 $outbound_seat[] = $start_seat;
+            }
+        }
+        
+        if($request->payment_method != 3){ // if payment method is cash, then remove approve
+            foreach($approve as $row){
+                foreach(json_decode($row->return_seat) as $return_seat){
+                    $inbound_seat[] = $return_seat;
+                } 
+                foreach(json_decode($row->start_seat) as $start_seat){
+                    $outbound_seat[] = $start_seat;
+                }
             }
         }
         $request_outbound_seat = explode( ",", $request->out_bound );
