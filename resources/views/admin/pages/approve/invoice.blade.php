@@ -97,7 +97,7 @@
         <img src="{{public_path().'/images/admin/logo.png'}}" alt="" width="50">
       </div>
       <div class="info"> 
-        <h2>NUMERO UN CONSULTANCY</h2>
+        <h2>NUMERO UN TRAVEL</h2>
       </div><!--End Info-->
     </center><!--End InvoiceTop-->
     
