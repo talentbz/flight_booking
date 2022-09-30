@@ -1,0 +1,19 @@
+.header {
+    width: 100%;
+}
+.header .menu {
+    padding: 10px 0;
+    width: 1100px;
+    margin: auto;
+}
+.header .menu .user-avatar {
+    float: right;
+    font-weight: 600;
+    font-size: 15px;
+    margin: 20px 0;
+}
+.header .menu .user-avatar i {
+    font-size: 23px;
+    color: #32ADE7;
+    margin-right: 10px;
+}

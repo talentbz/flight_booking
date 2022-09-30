@@ -1,0 +1,25 @@
+.footer {
+    background-image: url('../../../images/frontend/footer.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.footer-content {
+    border: 1px solid #D9D9D9;
+}
+.footer-wrapper {
+    width: 1102px;
+    margin: 0 auto;
+}
+.footer-wrapper .footer-list{
+    border-right: 1px solid #D9D9D9;
+    padding: 27px 0;
+}
+.footer-list a{
+    font-size: 12px;
+    text-decoration: none;
+}
+.footer-list p {
+    font-weight: 700;
+    font-size: 18px;
+    color: #fff;
+}

@@ -4,25 +4,23 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import store from '../store';
-
-import HomePage from './HomePage';
+import './App.scss';
+import HomePage from './HomePage/HomePage';
 
 function App() {
     return (
         <Provider store={store}>
-        <Router>
-            <Switch>
-                {/* <Route exact path="/" component={HomePage}></Route> */}
-                {/* <AuthRoute path="/signin" component={SigninPage} />
-                <AuthRoute path="/forgotpass" component={ForgotPasswordPage} />
-                <AuthRoute path="/signup" component={SignupPage} />
-                <PrivateRoute path="/board" component={BoardPage} />
-                <PrivateRoute path="/tradinglog" component={TradingLogPage} />
-                <PrivateRoute path="/tradingbot" component={TradingBotPage} />
-                <PrivateRoute path="/marketmaker" component={MarketMaker} /> */}
-            </Switch>
-        </Router>
-    </Provider>
+            <Router>
+                    <Route path="/" component={HomePage}></Route>
+                    {/* <AuthRoute path="/signin" component={SigninPage} />
+                    <AuthRoute path="/forgotpass" component={ForgotPasswordPage} />
+                    <AuthRoute path="/signup" component={SignupPage} />
+                    <PrivateRoute path="/board" component={BoardPage} />
+                    <PrivateRoute path="/tradinglog" component={TradingLogPage} />
+                    <PrivateRoute path="/tradingbot" component={TradingBotPage} />
+                    <PrivateRoute path="/marketmaker" component={MarketMaker} /> */}
+            </Router>
+        </Provider>
     );
 }
 

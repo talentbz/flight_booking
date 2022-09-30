@@ -19,8 +19,8 @@
                                 <div class="row">
                                     <div class="col-7">
                                         <div class="text-primary p-4">
-                                            <h5 class="text-primary">Welcome Back !</h5>
-                                            <p>Sign in to continue to Skote.</p>
+                                            <!-- <h5 class="text-primary">Welcome Back !</h5> -->
+                                            <!-- <p>Sign in to continue to Skote.</p> -->
                                         </div>
                                     </div>
                                     <div class="col-5 align-self-end">
@@ -31,7 +31,7 @@
                             </div>
                             <div class="card-body pt-0">
                                 <div class="auth-logo">
-                                    <a href="index" class="auth-logo-light">
+                                    <a href="javascript:void(0)" class="auth-logo-light">
                                         <div class="avatar-md profile-user-wid mb-4">
                                             <span class="avatar-title rounded-circle bg-light">
                                                 <img src="{{ URL::asset('/assets/images/logo-light.svg') }}" alt=""
@@ -40,7 +40,7 @@
                                         </div>
                                     </a>
 
-                                    <a href="index" class="auth-logo-dark">
+                                    <a href="javascript:void(0)" class="auth-logo-dark">
                                         <div class="avatar-md profile-user-wid mb-4">
                                             <span class="avatar-title rounded-circle bg-light">
                                                 <img src="{{ URL::asset('/assets/images/logo.svg') }}" alt=""

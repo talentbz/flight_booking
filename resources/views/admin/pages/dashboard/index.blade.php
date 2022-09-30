@@ -4,8 +4,8 @@
 
 @section('content')
     @component('components.breadcrumb')
-        @slot('li_1') SakuraMotors @endslot
-        @slot('title') Dashboards @endslot
+        @slot('li_1') Dashboard @endslot
+        @slot('title') Dashboard @endslot
     @endcomponent
 @endsection
 @section('script')
