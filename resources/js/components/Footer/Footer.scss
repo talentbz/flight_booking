@@ -4,7 +4,7 @@
     background-size: cover;
 }
 .footer-content {
-    border: 1px solid #D9D9D9;
+    border-bottom: 1px solid #D9D9D9;
 }
 .footer-wrapper {
     width: 1102px;
@@ -17,9 +17,36 @@
 .footer-list a{
     font-size: 12px;
     text-decoration: none;
+    color: #fff;
 }
 .footer-list p {
     font-weight: 700;
     font-size: 18px;
     color: #fff;
+}
+.footer-list ul {
+    padding: 0;
+}
+.footer-list ul li {
+    list-style: none;
+    line-height: 40px;
+}
+.follow-us {
+    padding-left: 100px !important;
+}
+.instagram {
+    padding-left: 26px !important;
+    border-right: none !important;
+}
+.instagram .instagram-list{
+    width: 280px;
+}
+.footer-copyright {
+    text-align: center;
+    padding: 10px 0;
+    color: #fff;
+}
+.footer-copyright p {
+    margin: 0;
+    font-size: 14px;
 }
