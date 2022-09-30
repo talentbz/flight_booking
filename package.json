@@ -47,6 +47,7 @@
         "react-booking-form": "^2.0.0-alpha.64",
         "react-bootstrap": "^2.5.0",
         "react-bootstrap-icons": "^1.9.1",
+        "react-loader-spinner": "^5.3.4",
         "react-redux": "^7.2.4",
         "react-router": "^5.2.0",
         "react-router-dom": "^5.2.0",

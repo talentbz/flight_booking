@@ -9,9 +9,9 @@ function Header(){
     return (
         <div className='header'>
             <div className='menu'>
-                <Image className="logo" src={logo} />
+                <Link to={"/"}><Image className="logo" src={logo} /></Link>
                 <div className="user-avatar">
-                    <Link to="#"><AccountCircleIcon /><span>LOG IN</span></Link>
+                    <Link to={"/signin"}><AccountCircleIcon /><span>LOG IN</span></Link>
                 </div>
             </div>
         </div>

@@ -25,8 +25,7 @@ Route::post('/update-password/{id}', [App\Http\Controllers\HomeController::class
 
 //Language Translation
 Route::get('index/{locale}', [App\Http\Controllers\HomeController::class, 'lang']);
-Route::get('/', [App\Http\Controllers\FrontController::class, 'index'])->name('home');
-
+// Route::get('/', [App\Http\Controllers\FrontController::class, 'index'])->name('home');
 //admin section
 Route::prefix('/admin')->middleware(['auth:web'])->group(function () {
     Route::group(['middleware' => 'Admin'], function () {
@@ -91,3 +90,4 @@ Route::prefix('/admin')->middleware(['auth:web'])->group(function () {
     });
     Route::get('/cache_clear', [App\Http\Controllers\Admin\AdminController::class, 'clear'])->name('admin.cache.clear');
 });
+Route::view('{path?}', 'welcome');

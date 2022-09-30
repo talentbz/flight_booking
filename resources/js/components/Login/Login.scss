@@ -1,0 +1,22 @@
+.login .left-side {
+    background: url('../../../images/frontend/login.png');
+    height: 500px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.login .right-side {
+    background: #F3FAFF;
+}
+.login .left-contents {
+    width: 373px;
+    float: right;
+    margin-right: 25px;
+    margin-top: 180px;
+}
+.login .right-contents {
+    width: 615px;
+    float: left;
+    margin-left: 30px;
+    margin-top: 50px;
+}
