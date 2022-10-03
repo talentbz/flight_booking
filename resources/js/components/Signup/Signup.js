@@ -1,17 +1,56 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import Grid from '@mui/material/Grid';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { Link, useHistory } from 'react-router-dom';
+import Alert from '@mui/material/Alert';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col'
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import './Signup.scss';
+import { sessionActions } from '../../store';
 
 import { divide } from 'lodash';
 
 function Signup(){
+    const history = useHistory();
+    const dispatch = useDispatch();
+
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const [submitting, setSubmitting] = useState();
+    const [error, setError] = useState();
+    const [success, setSuccess] = useState();
+    const handleNameChange = (event) => {
+        setName(event.target.value);
+    }
+
+    const handleEmailChange = (event) => {
+        setEmail(event.target.value);
+    }
+
+    const handlePasswordChange = (event) => {
+        setPassword(event.target.value);
+    }
+
+
+    const handleRegister = async (e) => {
+        e.preventDefault();
+        const response = await fetch('/api/register', { method: 'POST', body: new URLSearchParams(`name=${name}&email=${email}&password=${password}`) });
+        const res = await response.json();
+        console.log(response);
+        if (res.success) {
+            setSuccess('Congratulations, your account has been successfully created.');
+            dispatch(sessionActions.updateUser(res.data));
+            // history.push('/signin');
+        } else {
+            setError(res.message);
+        }
+    }
     return (
         <>
             <Header/>
@@ -26,30 +65,22 @@ function Signup(){
                     <Grid className='right-side' item xs={7}>
                         <div className='right-contents d-grid'>
                             <h5 className="text-primary">Sign Up</h5>
-                            <Form>
+                            {error && <Alert severity="error">{error}</Alert>}
+                            {success && <Alert severity="success">{success}</Alert>}
+                            <Form onSubmit={handleRegister}>
                             <Form.Group className="mb-3">
                                 <Form.Label>Full Name</Form.Label>
-                                <Form.Control type="text" placeholder="Enter Your Name" />
+                                <Form.Control type="text" placeholder="Enter Your Name" onChange={handleNameChange} />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <Form.Label>Email address</Form.Label>
-                                <Form.Control type="email" placeholder="Enter email" />
+                                <Form.Control type="email" placeholder="Enter email" onChange={handleEmailChange} />
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Label>Password</Form.Label>
-                                <Form.Control type="password" placeholder="Password" />
+                                <Form.Control type="password" placeholder="Password" onChange={handlePasswordChange}/>
                             </Form.Group>
-                            {/* <Row>
-                                <Col xs={6}>
-                                    <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                                        <Form.Check type="checkbox" label="Remember Me" />
-                                    </Form.Group>
-                                </Col>
-                                <Col xs={6} className='text-right'>
-                                    <Link to={"./forgot-password"}>Forgot Password?</Link>
-                                </Col>
-                            </Row> */}
                             <Row>
                                 <Col>
                                     <Button variant="primary" type="submit" className="mb-3 btn-block">
