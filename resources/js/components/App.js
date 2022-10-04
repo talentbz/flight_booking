@@ -4,11 +4,14 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 // import { Audio } from 'react-loader-spinner'
 import store from '../store';
+import PrivateRoute from './PrivateRoute';
+import AuthRoute from './AuthRoute';
 import './App.scss';
 import HomePage from './HomePage/HomePage';
 import Login from './Login/Login';
 import Signup from './Signup/Signup';
 import ForgotPassword from './ForgotPassword/ForgotPassword';
+import UserProfile from './User/Profile/Profile';
 
 function App() {
     return (
@@ -16,16 +19,13 @@ function App() {
             <BrowserRouter>
                 <Switch>
                     <Route exact path="/" component={HomePage}></Route>
-                    <Route path="/signin" component={Login}></Route>
+                    {/* <Route path="/signin" component={Login}></Route>
                     <Route path="/signup" component={Signup}></Route>
-                    <Route path="/forgot-password" component={ForgotPassword}></Route>
-                    {/* <AuthRoute path="/signin" component={SigninPage} />
-                    <AuthRoute path="/forgotpass" component={ForgotPasswordPage} />
-                    <AuthRoute path="/signup" component={SignupPage} />
-                    <PrivateRoute path="/board" component={BoardPage} />
-                    <PrivateRoute path="/tradinglog" component={TradingLogPage} />
-                    <PrivateRoute path="/tradingbot" component={TradingBotPage} />
-                    <PrivateRoute path="/marketmaker" component={MarketMaker} /> */}
+                    <Route path="/forgot-password" component={ForgotPassword}></Route> */}
+                    <AuthRoute path="/signin" component={Login} />
+                    <AuthRoute path="/forgot-password" component={ForgotPassword} />
+                    <AuthRoute path="/signup" component={Signup} />
+                    <PrivateRoute path="/user_profile" component={UserProfile} />
                 </Switch>
             </BrowserRouter>
         </Provider>
