@@ -15,13 +15,11 @@ class PaystackController extends Controller
             $data = array(
                 "amount" => 700 * 100,
                 "reference" => Paystack::genTranxRef(),
-                "email" => 'vadim.progdev@gmail.com',
-                "currency" => "NGN",
+                "email" => 'email@gmail.com',
+                "currency" => "GHS",
                 "orderID" => 23456,
             );
-            dd(Paystack::getAuthorizationUrl());
             return Paystack::getAuthorizationUrl($data)->redirectNow();
-            // return Paystack::getAuthorizationUrl()->redirectNow();
         }catch(\Exception $e) {
             return Redirect::back()->withMessage(['msg'=>'The paystack token has expired. Please refresh the page and try again.', 'type'=>'error']);
         }        

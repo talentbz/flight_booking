@@ -9,6 +9,9 @@
         <!-- Fonts -->
         <!-- <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet"> -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+        
+        <script crossorigin src="//js.paystack.co/v1/inline.js"></script>
+
         <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
 
         <!-- Styles -->
