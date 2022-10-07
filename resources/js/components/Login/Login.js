@@ -38,7 +38,7 @@ function Login(){
         if (res.success) {
             setSuccess('success, You are successfully logged in');
             dispatch(sessionActions.updateUser(res.data));
-            // history.push('/board');
+            history.push('/user-profile');
         } else {
             setError(res.message);
         }

@@ -9,7 +9,6 @@ import { useSelector } from 'react-redux';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
     const user = useSelector(state => state.session.user); 
-    console.log(rest)
     return (
         <Route
             {...rest}

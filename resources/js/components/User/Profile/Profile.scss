@@ -19,6 +19,7 @@
     margin-left: 20px !important;
     width: 820px;
     float: right;
+    padding: 20px;
 }
 .avatar {
     width: 138px !important;
@@ -28,4 +29,10 @@
     margin: 20px auto;
     font-weight: 600;
     font-size: 30px !important;
+}
+
+/*Profile Pic Start*/
+.picture-container{
+    display: table;
+    margin: 20px auto;
 }

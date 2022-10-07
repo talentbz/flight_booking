@@ -19,7 +19,8 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
         "laravolt/avatar": "^4.1",
-        "nesbot/carbon": "^2.62"
+        "nesbot/carbon": "^2.62",
+        "unicodeveloper/laravel-paystack": "^1.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

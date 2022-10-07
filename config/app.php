@@ -176,6 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Laravolt\Avatar\ServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        Unicodeveloper\Paystack\PaystackServiceProvider::class,
 
     ],
 
@@ -231,6 +232,7 @@ return [
         'Image' => Intervention\Image\ImageManagerStatic::class,
         'Avatar'    => Laravolt\Avatar\Facade::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Paystack' => Unicodeveloper\Paystack\Facades\Paystack::class,
     ],
 
 ];

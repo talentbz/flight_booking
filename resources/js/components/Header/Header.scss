@@ -10,10 +10,30 @@
     float: right;
     font-weight: 600;
     font-size: 15px;
-    margin: 20px 0;
+    margin: 13px 0;
 }
 .header .menu .user-avatar i {
     font-size: 23px;
     color: #32ADE7;
     margin-right: 10px;
+}
+.avatar-image {
+    background: transparent !important;
+    border: none !important;
+}
+.avatar-image:hover, .avatar-image:active{
+    background: transparent !important;
+    background-color: transparent !important;
+}
+.avatar-image:focus{
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+.avatar-image img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: contain;
+    border: 1px solid #ddd;
 }

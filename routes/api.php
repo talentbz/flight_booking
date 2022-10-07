@@ -18,5 +18,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('register', [App\Http\Controllers\API\AuthController::class, 'register'])->name('api.register');
-Route::post('login', [App\Http\Controllers\API\AuthController::class, 'login'])->name('api.login');
+Route::post('/register', [App\Http\Controllers\API\AuthController::class, 'register'])->name('api.register');
+Route::post('/login', [App\Http\Controllers\API\AuthController::class, 'login'])->name('api.login');
+Route::post('/user-store', [App\Http\Controllers\API\UserController::class, 'store'])->name('api.user.store');
+// Route::prefix('/payment')->group(function () {
+    Route::post('/pay', [App\Http\Controllers\API\PaystackController::class, 'redirectToGateway'])->name('api.paystack.pay');
+    // Route::get('/payment/callback', [App\Http\Controllers\API\PaystackController::class, 'handleGatewayCallback'])->name('api.paystack.controll');
+// });

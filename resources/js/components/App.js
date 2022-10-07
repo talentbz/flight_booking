@@ -22,10 +22,10 @@ function App() {
                     {/* <Route path="/signin" component={Login}></Route>
                     <Route path="/signup" component={Signup}></Route>
                     <Route path="/forgot-password" component={ForgotPassword}></Route> */}
-                    <AuthRoute path="/signin" component={Login} />
-                    <AuthRoute path="/forgot-password" component={ForgotPassword} />
-                    <AuthRoute path="/signup" component={Signup} />
-                    <PrivateRoute path="/user_profile" component={UserProfile} />
+                    <Route path="/signin" component={Login} />
+                    <Route path="/forgot-password" component={ForgotPassword} />
+                    <Route path="/signup" component={Signup} />
+                    <PrivateRoute path="/user-profile" component={UserProfile} />
                 </Switch>
             </BrowserRouter>
         </Provider>
